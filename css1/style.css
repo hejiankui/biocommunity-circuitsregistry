@@ -1,0 +1,62 @@
+/*style for all pages*/
+
+#header {
+	background-color: #e8ebf1;
+	
+}
+#logo {
+	margin-left: 40px;
+	margin-top: 3px;
+	width: 350px;
+	position: bottom;
+}
+#search {
+	height: 22px;
+	margin-top: 24px;
+	margin-right: 40px;
+	float: right;
+	background: white;
+	border-radius: 10px;
+	border: 1px solid #ccc;
+	text-indent: .5em;
+}
+#search img {
+	width: 22px;
+}
+#search input {
+	position: relative;
+	top: -6px;
+	left: -6px;
+	border: none;
+	outline: none;
+	color: #bbb;
+}
+#navi {
+	margin-top: 28px;
+	margin-right: 30px;
+	float: right;
+}
+#navi a {
+	margin-right: 5px;
+	padding-top: 5px;
+	padding-right: 30px;
+	padding-left: 10px;
+	font-family: Helvetica, Geneva, Verdana, Arial, sans-serif;
+	text-decoration: none;
+	color: black;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+	
+#midcontainer img {
+	position: absolute
+	}
+
+
+
+
+
+
+/*style for index*/
+

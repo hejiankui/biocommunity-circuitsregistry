@@ -1,0 +1,56 @@
+.node circle {
+	cursor: pointer;
+	fill: #fff;
+	stroke: steelblue;
+	stroke-width: 1.5px;
+}
+
+.node text {
+	cursor: pointer;
+	font-size: 16px;
+}
+
+path.link {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 1.5px;
+}
+
+.black_overlay {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 800px;
+	overflow:hidden;
+	background-color: rgba(0,0,0,.7);
+	z-index:1001;
+}
+.white_content {
+	display: none;
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	width: 80%;
+	height: 600px;
+	background-color: white;
+	z-index:1002;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+#mr_Protocol, #mr_Comment, #mr_Circuit {
+	display: none;
+}
+
+.tab {
+	padding: 5px;
+	cursor: pointer;
+	font-size: 1.2em;
+	border-radius: 10px;
+	border-top: 2px solid #ccc;
+}
+.tab:hover {
+	background: red;
+}
