@@ -61,7 +61,11 @@
 						<li class="divider-vertical"></li>
 						<li><a href="index.html" title="Home">HOME</a></li>
 						<li class="divider-vertical"></li>
+<<<<<<< HEAD
 						<li><a href="tutorial.html" title="Tutorial">TUTORIAL</a></li>
+=======
+						<li><a href="index.html" title="Tutorial">TUTORIAL</a></li>
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 						<li class="divider-vertical"></li>
 						<li><a href="submit.html" title="Submit">SUBMIT</a></li>
 						<li class="divider-vertical"></li>

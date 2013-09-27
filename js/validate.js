@@ -4,7 +4,11 @@ function checkEmpty(){
 		$("#"+this.id).attr("validated", "0");
 		$("#"+this.id+"d").removeClass("control-group success")
 			.addClass("control-group error");
+<<<<<<< HEAD
 		if($("[validated='1']").length!=7) {
+=======
+		if($("[validated='1']").length!=9) {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			$("#subb").addClass("disabled")
 				.attr("disabled","disabled");
 		}
@@ -14,7 +18,11 @@ function checkEmpty(){
 		$("#"+this.id).attr("validated", "1");
 		$("#"+this.id+"d").removeClass("control-group error")
 			.addClass("control-group success");
+<<<<<<< HEAD
 		if($("[validated='1']").length==7) {
+=======
+		if($("[validated='1']").length==9) {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			$("#subb").removeClass("disabled")
 				.removeAttr("disabled");
 		}
@@ -22,12 +30,20 @@ function checkEmpty(){
 }
 function checkEmail() {
 	var email = $("#"+this.id).val();
+<<<<<<< HEAD
 	if(!(/^[\w\.-_\+]+@[\w-]+(\.\w{2,3})+$/.test(email))) {
+=======
+	if(!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(email))) {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 		$("#"+this.id+"s").html("invalidate Email address");
 		$("#"+this.id).attr("validated", "0");
 		$("#"+this.id+"d").removeClass("control-group success")
 			.addClass("control-group error");
+<<<<<<< HEAD
 		if($("[validated='1']").length!=7) {
+=======
+		if($("[validated='1']").length!=9) {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			$("#subb").addClass("disabled")
 				.attr("disabled","disabled");
 		}
@@ -37,7 +53,11 @@ function checkEmail() {
 		$("#"+this.id).attr("validated", "1");
 		$("#"+this.id+"d").removeClass("control-group error")
 			.addClass("control-group success");
+<<<<<<< HEAD
 		if($("[validated='1']").length==7) {
+=======
+		if($("[validated='1']").length==9) {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			$("#subb").removeClass("disabled")
 				.removeAttr("disabled");
 		}
@@ -51,7 +71,11 @@ function checkYear() {
 		$("#"+this.id).attr("validated", "1");
 		$("#"+this.id+"d").removeClass("control-group error")
 			.addClass("control-group success");
+<<<<<<< HEAD
 		if($("[validated='1']").length==7) {
+=======
+		if($("[validated='1']").length==9) {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			$("#subb").removeClass("disabled")
 				.removeAttr("disabled");
 		}
@@ -63,7 +87,11 @@ function checkYear() {
 		$("#"+this.id+"d").removeClass("control-group success")
 			.addClass("control-group error");
 		$("#"+this.id).attr("validated", "0");
+<<<<<<< HEAD
 		if($("[validated='1']").length!=7) {
+=======
+		if($("[validated='1']").length!=9) {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			$("#subb").addClass("disabled")
 				.attr("disabled","disabled");
 		}

@@ -6,7 +6,10 @@ function send(s) {
 	xmlHttp.onreadystatechange=stateChanged;
 	xmlHttp.open("GET",url,true);
 	xmlHttp.send(null);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 }	
 
 function stateChanged() { 
@@ -93,7 +96,10 @@ function stateChanged() {
 		
 		$("#link_lgd").attr("href","lgd.php?name="+Ecoid);
 	}
+<<<<<<< HEAD
         fetch();
+=======
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 }
 
 function GetXmlHttpObject() {

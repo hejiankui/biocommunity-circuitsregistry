@@ -23,6 +23,7 @@
     <script async="true" src=
     "http://sustc-genome.org.cn/igem2013/test_02.php?callback=getJSON_02" type=
     "text/javascript"></script>
+<<<<<<< HEAD
     <script type="text/javascript" src="js/tab_list.js" charset="utf-8"></script>
     <script type="text/javascript">
         function check_login(){
@@ -99,6 +100,9 @@
         });
         
     </script>
+=======
+	<script type="text/javascript" src="js/tab_list.js" charset="utf-8"></script>
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
     <style type="text/css">
 	body{ 
 		background:url(img/Grunge1.png) no-repeat center center fixed;
@@ -153,11 +157,19 @@
                 <li class="divider-vertical"></li>
                 <li><a href="index.html" title="Home">HOME</a></li>
                 <li class="divider-vertical"></li>
+<<<<<<< HEAD
                 <li><a href="tutorial.html" title="Tutorial">TUTORIAL</a></li>
                 <li class="divider-vertical"></li>
                 <li><a href="submit.html" title="Submit">SUBMIT</a></li>
                 <li class="divider-vertical"></li>
                 <li><a href="about.html" title="About">ABOUT</a></li>
+=======
+                <li><a href="about.html" title="Tutorial">TUTORIAL</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="submit.html" title="Submit">SUBMIT</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="#" title="About">ABOUT</a></li>
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
             </ul>
             <form class="navbar-search">
                     <input type="text" class="span2 search-query" placeholder="Search">
@@ -198,6 +210,7 @@
 						<div class="tab-pane" id="reference">
 							<div id="ref"></div>
 						</div>
+<<<<<<< HEAD
 						<div class="tab-pane" id="comment">
                                                     <div>
                                                     <div class="well" id="comment_form">
@@ -216,6 +229,9 @@
                                                     
                                                     </div>
                                                 </div>
+=======
+						<div class="tab-pane" id="comment">Under construction.</div>
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 					</div>
 				</div>
 				<div class="modal-footer">

@@ -6,6 +6,7 @@
 <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
 <link type="text/css" rel="stylesheet" href="css/_styles.css"/>
 <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<<<<<<< HEAD
 <script src="js/jquery.min.js" ></script>
 <style type="text/css">
 .dragme{ position:absolute;}
@@ -13,6 +14,14 @@
 #tools{position:fixed;left:30;top:290px;}
 #files{position:fixed;left:30;top:180px;}
 #open{position:fixed;left:30;top:100px;}
+=======
+<script src="js/jquery.js" ></script>
+<style type="text/css">
+.dragme{ position:absolute;}
+#forcanvas{float:right; position:absolute; height:100%; width:100%; overflow-y:hidden;overflow-x:scroll; background-color:#333; margin-left:auto; margin-right:auto; margin-top:82px;}
+
+}
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 </style>
 <style type="text/css">
 table.footcollapse{
@@ -65,6 +74,11 @@ if(@mysql_select_db("db_bacteria2", $con)){
 	print '<p>NO！</p>';
 }//连接数据库
 $as=1;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 $new= array (); //存储codingframe的属性【数字】
 $stimulation = array ();//刺激源字符串【数字】
 $target = array ();//靶目标order【数字】
@@ -102,7 +116,11 @@ while($b = mysql_fetch_array($bacteria)){
 								  $position[$i]=$r['codingframeid']%$start + 1;
 							  }
 		                  switch($r['DNAproperty'])
+<<<<<<< HEAD
 			                 {	
+=======
+			                 {
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			                   case'promoter':
 				                  $new[$i]=1;
                                   break;
@@ -123,7 +141,10 @@ while($b = mysql_fetch_array($bacteria)){
 	                }	                    
             } 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 $test = implode (",",$new);//将codingrame按顺序依次排列
 $test1 = implode (",",$position);//每个biobrick所属的codingframe
 $bt1 = implode (",",$bname);//biobrick-name
@@ -141,7 +162,11 @@ while($b1 = mysql_fetch_array($bacteria1)){
 			$tar=mysql_query("SELECT * FROM relation WHERE target='$id[biobrickID]'");
 			//echo "SELECT * FROM relation WHERE target='$id[biobrickID]'";
 			while($t=mysql_fetch_array($tar))
+<<<<<<< HEAD
 				  {
+=======
+				  {				
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 				$target[$j]=$id['order'];//目标
                 switch($t['realation'])
 					  {
@@ -190,9 +215,15 @@ while($b1 = mysql_fetch_array($bacteria1)){
 //echo $cnumber;
 ?>
 <script>
+<<<<<<< HEAD
 	var editcodf;
 	var app="<?php echo $bt1; ?>";
 	var name1= app.split(",");
+=======
+	var app="<?php echo $bt1; ?>";
+	var name1= app.split(",");
+
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	app="<?php echo $bt2; ?>";
 	var number= app.split(",");
 	app="<?php echo $bt3; ?>";
@@ -221,13 +252,18 @@ while($b1 = mysql_fetch_array($bacteria1)){
 		if ((aDiv.clientWidth+oEvent.clientX+60)<screen.width)
 		aDiv.style.left=oEvent.clientX+60;
 			else aDiv.style.left=screen.width-aDiv.clientWidth-10;
+<<<<<<< HEAD
 		if ((aDiv.clientHeight+oEvent.clientY+180)<screen.height)
+=======
+		if ((aDiv.clientHeight+oEvent.clientY+90)<screen.height)
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 		aDiv.style.top=oEvent.clientY+30;
 			else aDiv.style.top=screen.height-aDiv.clientHeight-200;
 	};
 }
 
 function upit(obj){
+<<<<<<< HEAD
 	var cc=1;
 	for (cc=1;cc<=24;cc++){
 	var obj1=document.getElementById(cc);
@@ -286,6 +322,27 @@ function open(){
      cftype=fk.split(",");//不同的codingframe
 	 
 	 var bk="<?php echo $sz; ?>";
+=======
+	obj.style.zIndex=30;
+	}
+</script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $("#forcanvas").height($("#forcanvas").height()-82);
+});
+</script>
+<script type="text/javascript">
+	 var ak="<?php echo $test; ?>";
+	 var cf = new Array();
+	
+     cf=ak.split(",");//codingframe 的顺序
+	 var huan=cf[1];
+	
+	 var layer=cf.length;//codingframe 的长度
+	 var bk="<?php echo $sz; ?>";
+	 
+	 //var reactant =new Array(1,3,5,0,0,1,0);
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	 var reactant = new Array();
 	 reactant=bk.split(",");//产生物质的顺序
 
@@ -304,6 +361,7 @@ function open(){
 	 var proposition = new Array();
      proposition=nk.split(",");
 
+<<<<<<< HEAD
 	 var cfnum1="<?php echo $cnumber; ?>";
 	 cfnum=parseInt(cfnum1);
 
@@ -311,6 +369,14 @@ function open(){
 	 
 	 //var relatype=new Array(0,1,0,1,0,1,0);
 	 var dk="<?php echo $guanxi; ?>"; 
+=======
+	 var cfnum="<?php echo $cnumber; ?>";
+	 //var cfnum=2;
+	 var cflength=new Array(0,0,0,0,0,0,0,0,0,0);
+	 
+	 //var relatype=new Array(0,1,0,1,0,1,0);
+	 var dk="<?php echo $guanxi; ?>";
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	 var relatype = new Array();
      relatype=dk.split(",");//关系
 
@@ -318,13 +384,25 @@ function open(){
 	var ek="<?php echo $ciji; ?>";
 	 var condition = new Array();
      condition=ek.split(",");//条件
+<<<<<<< HEAD
 	
+=======
+	 
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	 var countid=new Array();
 	 for(e=1;e<=cf.length;e++){countid[e-1]=e}//通过cf给定countid
 	 
 
+<<<<<<< HEAD
 
 	 
+=======
+	// var cftype=new Array(1,1,1,1,1,1,1,1,1,2,2,2,2)
+	 var fk="<?php echo $test1; ?>";
+	 var cftype = new Array();
+     cftype=fk.split(",");//不同的codingframe
+	 var can_width=720;
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	 
 	 function cal_length(){
 		 for(e=1;e<=cfnum;e++){
@@ -332,11 +410,47 @@ function open(){
 				 if(cftype[f]==e){
 					 cflength[e]=cflength[e]+1;
 				 }
+<<<<<<< HEAD
 			 }
 		 }
 	 }//算每条codingframe多长
 
 
+=======
+			 }		 
+		 }
+	 }
+	 function corect_array(){
+		 var add=cflength[1];
+		 for(f=2;f<=cfnum;f++){
+		    for(e=0;e<=reactant.length;e++){
+			   if(reaposition[e]==f){
+				   reactant[e]=parseInt(reactant[e])+parseInt(add)
+			   }			   	  
+		 }		 
+		 add=add+cflength[f]
+	   }
+	   var add1=cflength[1];	  
+	   for(f=2;f<=cfnum;f++){
+		    for(e=0;e<=reactant.length;e++){
+			   if(proposition[e]==f){	 
+				   product[e]=parseInt(product[e])+parseInt(add1);				   
+			   }
+			   		 }			 
+		 add1=add1+cflength[f]
+	   }	  
+	 }
+function canvas(){
+		var countstrain=cftype.length;
+		var lastnum=2*cftype[countstrain-1];
+		can_width=130*(countstrain+lastnum);
+		if(countstrain>9){
+			can_width=130*(countstrain+lastnum);
+			obj=document.getElementById('canvas');
+			obj.width=can_width;
+		}
+	}
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	function drawimg(getype,id,left){
 	    if (getype==1)
 		ab="img/promoter.png";
@@ -351,30 +465,47 @@ function open(){
 		left=left+"px"
 		obj.style.left=left;
 		}
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	 function readcircuit()
 	 {		
 			var dd=1;
 			var img=new Array();
+<<<<<<< HEAD
 			var left=260;
 			var t=0; 
 			var cdn=0;
+=======
+			var left=130;	
+			var t=1; 
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 		    for (b=0;b<cf.length;b++)
 			{
 			var obj=document.getElementById(dd);
 			obj.style.top=cftype[b]*160;
 			obj.style.display="";
+<<<<<<< HEAD
 			if (cftype[b] != t) {left=260; cdn++;var tr=100+cdn;var obj1=document.getElementById(tr); obj1.style.display=""; obj1.style.zIndex=50;obj1.style.top=cftype[b]*160+15; obj1.style.left=240;}
 			drawimg(cf[b],dd,left);
 			
+=======
+			if (cftype[b] != t) left=130;
+			drawimg(cf[b],dd,left);
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			t=cftype[b];
 			left=left+130;
 			dd=dd+1;
 			}
+<<<<<<< HEAD
 			var obj1=document.getElementById('addc');
 			obj1.style.top=t*160+100;
 	 }
 	 
+=======
+	 }
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 function correction(f){
 		obj=document.getElementById(f);
 		x=obj.offsetLeft;
@@ -392,31 +523,57 @@ function correction(f){
 		obj.style.left=x0;
 		obj.style.top=y0;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	function correctiontest(obj){
 		var pbj;
 		var ebj;
 		var bi=-1;
+<<<<<<< HEAD
 		obj.style.zIndex=1;
 		for(e=1; e<=cf.length+1;e++){
 			correction(e);
 		}	//重合式对齐
 		for(e=1; e<=24;e++){
+=======
+		
+		obj.style.zIndex=1;
+		
+		for(e=0; e<=14;e++){
+			correction(countid[e]);
+		}	//重合式对齐
+
+		for(e=1; e<=countid.length;e++){
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 			ebj=document.getElementById(e);
 			for(p=1; p<=countid.length;p++){
 				pbj=document.getElementById(p);
 				if(e!=p) if ((pbj.offsetLeft==ebj.offsetLeft)&&(pbj.offsetTop==ebj.offsetTop)) {bi=pbj.offsetLeft; break;}
 		}	
 		}	//判断重合位点并平移
+<<<<<<< HEAD
 		if(bi<firstmoveed){		
 			for(e=1; e<=24;e++){
+=======
+		
+		if(bi<firstmoveed){		
+			for(e=1; e<=15;e++){
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 				ebj=document.getElementById(e);
 				if(document.getElementById(firstmoveid).offsetTop==ebj.offsetTop)
 				if((ebj.offsetLeft>=bi)&&(ebj.offsetLeft<=firstmoveed)&&(ebj.id!=firstmoveid)&&(bi!=-1)) {var a=ebj.offsetLeft; a=parseInt(a)+130+"px";  ebj.style.left=a;}
 				}
 				}//向右移
+<<<<<<< HEAD
    else if(bi>firstmoveed){
 	   		for(e=1; e<=24;e++){
+=======
+			
+   else if(bi>firstmoveed){
+	   		for(e=1; e<=15;e++){
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 				ebj=document.getElementById(e);
 				if(document.getElementById(firstmoveid).offsetTop==ebj.offsetTop)
 				if((ebj.offsetLeft>=firstmoveed)&&(ebj.offsetLeft<=bi)&&(ebj.id!=firstmoveid)&&(bi!=-1)) {var a=ebj.offsetLeft; a=parseInt(a)-130+"px";  ebj.style.left=a;}
@@ -430,7 +587,11 @@ function myfunction(){
 }
 </script>
 
+<<<<<<< HEAD
 
+=======
+<script src="js/jquery.js" ></script>
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 
 <script type="text/javascript">
 var ie=document.all;
@@ -438,7 +599,14 @@ var nn6=document.getElementById && !document.all;
 var isdrag=false;
 var x,y;
 var dobj;
+<<<<<<< HEAD
 
+=======
+function leave(){
+	var aDiv=document.getElementById('rightbottom');
+	aDiv.style.display="none";
+	}
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 function movemouse(e)
 {
 if (isdrag)
@@ -579,6 +747,7 @@ function drawtest(){
 		var b=0;
 		for(a=0;a<=cf.length;a++){if (cftype[a]==op) b++; }
 	ctx.beginPath();	
+<<<<<<< HEAD
 	ctx.moveTo(140,160*op+30);
 	ctx.lineTo(310+130*b,160*op+30);
 	ctx.stroke();
@@ -587,6 +756,15 @@ function drawtest(){
 	ctx.fillText("cod "+op+" start",140,160*op+30);
 	
 	ctx.fillText("END",260+130*b,160*op+30);
+=======
+	ctx.moveTo(10,160*op+30);
+	ctx.lineTo(180+130*b,160*op+30);
+	ctx.stroke();
+	ctx.font="20px Georgia";
+	ctx.fillStyle="#FFF";
+	ctx.fillText("cod "+op+" start",10,160*op+30);
+	ctx.fillText("END",130+130*b,160*op+30);
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 	}
 	
 	for(i=1;i<=cf.length;i++){
@@ -608,12 +786,24 @@ function drawtest(){
 </script>
 
 <script type="text/javascript">
+<<<<<<< HEAD
      $(document).ready(function(){
           $(".dragme").dblclick(function(){
             //$(this).remove();
 			$(this).style.display="none";
             var removeid= $(this).attr('id');
 			alert(removeid);
+=======
+function leave(){
+	var aDiv=document.getElementById('infotable');
+	aDiv.style.display="none";
+	}
+	
+     $(document).ready(function(){
+          $(".dragme").dblclick(function(){
+            $(this).remove();
+            var removeid= $(this).attr('id');
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
             for(e=0;e<=reactant.length;e++){
 				if(reactant[e]==removeid){
 					reactant.splice(e,1);
@@ -636,6 +826,7 @@ function drawtest(){
 			cf.splice(removeid-1,1);
   });
 });
+<<<<<<< HEAD
 
 
 </script>
@@ -651,6 +842,112 @@ function drawtest(){
 
 </head>
 <body onLoad=" cal_length();readcircuit();drawtest();tablecollapse()" >
+=======
+</script>
+
+<script language="javascript">
+function tablecollapse()
+{
+	/* Variables */
+	var collapseClass='footcollapse';
+	var collapsePic='http://www.webjx.com/upfiles/20070619/20070619214338_arrow_up.gif';
+	var expandPic='http://www.webjx.com/upfiles/20070619/20070619214348_arrow_down.gif';
+	var initialCollapse=true;
+
+	// loop through all tables
+	var t=document.getElementsByTagName('table');
+	var checktest= new RegExp("(^|\\s)" + collapseClass + "(\\s|$)");
+	for (var i=0;i<t.length;i++)
+	{
+		// if the table has not the right class, skip it
+		if(!checktest.test(t[i].className)){continue;}		
+		// make the footer clickable
+		t[i].getElementsByTagName('tfoot')[0].onclick=function()
+		{
+			// loop through all bodies of this table and show or hide 
+			// them
+			var tb=this.parentNode.getElementsByTagName('tbody');
+			for(var i=0;i<tb.length;i++)
+			{
+				tb[i].style.display=tb[i].style.display=='none'?'':'none';
+			}			
+			// change the image accordingly
+			var li=this.getElementsByTagName('img')[0];
+			li.src=li.src.indexOf(collapsePic)==-1?collapsePic:expandPic;	
+		}
+		// if the bodies should be collapsed initially, do so
+		if(initialCollapse)
+		{
+			var tb=t[i].getElementsByTagName('tbody');
+			for(var j=0;j<tb.length;j++)
+			{
+				tb[j].style.display='none';
+			}			
+		}
+		// add the image surrounded by a dummy link to allow keyboard 
+		// access to the last cell in the footer
+		var newa=document.createElement('a');
+		newa.href='#';
+		newa.onclick=function(){return false;}
+		var newimg=document.createElement('img');
+		newimg.src=initialCollapse?expandPic:collapsePic;
+		var tf=t[i].getElementsByTagName('tfoot')[0];
+		var lt=tf.getElementsByTagName('td')[tf.getElementsByTagName('td').length-1];
+		newa.appendChild(newimg);
+		lt.insertBefore(newa,lt.firstChild);
+	}		
+}
+// run tablecollapse when the page loads
+</script>
+
+<script>
+function navi(obj){
+	var newid=obj.id;
+	var newobj=new Array();
+	obj.width="195";
+	obj.height="70";
+	var newa=parseInt(newid);
+	newa=newa+1;
+	for(newa;newa<=103;newa++){
+		newobj[newa]=document.getElementById(newa);
+		var b=newobj[newa].offsetTop;
+		b=b+20+"px"
+		newobj[newa].style.top=b;
+	}
+}
+function navi1(obj){
+	var newid=obj.id;
+	var newobj=new Array();
+	obj.width="150";
+	obj.height="50";
+	var newa=parseInt(newid);
+	newa=newa+1;
+	for(newa;newa<=102;newa++){
+		newobj[newa]=document.getElementById(newa);
+		var b=newobj[newa].offsetTop;
+		b=b-20+"px"
+		newobj[newa].style.top=b;
+	}
+}
+
+function test(obj){
+	        e=obj.id;		
+			var E=parseInt(e)+23;
+			var obj1=document.getElementById(E);
+			var url='img/'+obj.title+'.png';
+			obj1.src=url; 
+			obj1.style.left="0px";
+			obj1.style.top="0px";
+}
+</script>
+<script>
+function addcodf(){
+	cfnum++;
+	}
+</script>
+</head>
+<body onLoad=" cal_length();corect_array();canvas();readcircuit();drawtest();tablecollapse()" >
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
 
 <div class="navbar navbar-fixed-top navbar-inverse">
         
@@ -693,6 +990,7 @@ function drawtest(){
    
 	    <div id="forcanvas">
       		<canvas width="5000" height="4000" id="canvas">not avoluable on your brosower</canvas>  
+<<<<<<< HEAD
 				
 				<div id="open" style="z-index:100" class="btn-group btn-group-vertical">
 				<input class="btn" type="file" name="file" id="file" /> 
@@ -787,8 +1085,44 @@ function drawtest(){
 				</div>
 				   
 		</div>
+=======
+
+            
+            <img id="1"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/>      
+            <img id="2"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="3"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="4"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="5"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="6"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="7"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="8"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="9"  src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="10" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="11" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="12" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="13" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="14" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="15" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="16" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="17" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="18" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="19" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="20" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="21" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="22" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="23" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+            <img id="24" src="" class="dragme" style="top: 160px; display:none;" onMouseDown="upit(this)" onMouseUp="correctiontest(this)" onMouseMove="myfunction()" onMouseOver="information(this)"onMouseOut="leave()"/> 
+     </div>
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
   
 </body>
 </html>
 
+<<<<<<< HEAD
 
+=======
+            <?php
+			for ($as=1;$as<=30;$as++);
+			echo("<img id=\""+$as+" \"src=\"\" class=\"dragme\" style=\"top: 160px\" onMouseDown=\"upit(this)\" onMouseUp=\"correctiontest(this)\" onMouseMove=\"myfunction()\" onMouseOver=\"information(this)\"onMouseOut=\"leave()\"/>");
+			?> 
+>>>>>>> 61b08c2148451701f30e29d3bf3bb66fb75ec7c1
