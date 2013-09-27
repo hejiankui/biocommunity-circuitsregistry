@@ -1,0 +1,847 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<link type="text/css" rel="stylesheet" href="css/_styles.css"/>
+<style type="text/css">
+
+.head{margin:0;padding:0;}	
+#panel { width: 170px;  margin-left:5px}
+.head { cursor: pointer ; background-image:url(img/library%E7%9C%9F%E7%B4%A0%E6%9D%90.png); }
+.content { display:block;padding-top:2px; padding-bottom:2px;background-color:#666}
+#content{ height:140px; overflow:auto}
+#library{ height:30px; width:170px;}
+#container{ width:1300px;margin-left:auto; margin-right:auto;}
+#header{margin-bottom:px; padding-bottom:0px; width:1300px;height:64px}
+#midcontainer{ background-image:url(img/back.jpg); width:1300px; height:700px; margin-top:0px; padding-top:0px;}
+#midcontainer1{ background-image:url(img/background.png); width :1200px; height: 650px; margin-left:50px; margin-right:50px; margin-top:50px; margin-bottom:25px; position:absolute}
+#middle1{  margin-left:200px; position:absolute; width:980px; height:540px;  margin-top:60px;}
+#midtop{  width:980px; height:30px;} 
+#midtop img{ position:absolute;}
+#middle{  position:absolute; width:980px; height:510px}
+#left{ height:510px; border-color:#000; width:180px; float:left ; background-color:#111111; margin-top:0px}
+#right{  height:510px; width:789px ; float:left; padding-left:1px; background-color:#111111; margin-top:0px}
+#righttop{ height:373px; width:789px}
+#canvascontainer{ position:absolute;margin-left:35px; margin-right:35px; margin-top:20px; height:320px; overflow-x:auto; overflow-y:hidden;width:720px}
+#forbutton{  position:absolute;height:33px; width:720px; margin-top:340px;margin-left:35px; }
+#rightbotom{  width:789px ; }
+#rightbottom table{margin-left:auto; margin-right:auto;}
+#tr1{text-align:center};
+#right img{position:absolute}
+#table{font-family: "Arial Black", Gadget, sans-serif;
+	color: #FFF; }
+
+}
+
+ 
+ 
+</style>
+<?php
+//$number=$_GET['number'];//获取细菌编号
+
+$con = mysql_connect("localhost","root","");
+if (!$con)
+  {
+  die('Could not connect: ' . mysql_error());
+  }//连接数据库
+
+ mysql_select_db("run", $con);
+
+if(@mysql_select_db("run", $con)){
+	print '<p>YES！</p>';
+}else{
+	print '<p>NO！</p>';
+}//连接数据库
+
+$new= array (); //存储codingframe的属性【数字】
+$stimulation = array ();//刺激源字符串【数字】
+$target = array ();//靶目标order【数字】
+$protein = array ();//生成蛋白的基因ORDER
+$relation = array();//关系【字符】，可以改数字
+$position = array();//codingframe的位置
+$position1 = array ();//codingframe--target;
+$postion2 = array ();//codingfarme--protein;
+$i=0;//排序计数器
+$j=0;//目标，关系计数器
+$k=0;//刺激源计数器
+$l=0;//蛋白质技术器
+$m=0;//codingframe计数器
+$cnumber=0;//codingframe的数目
+
+
+$bacteria = mysql_query("SELECT * FROM ecocct WHERE Ecoid='Eco000_58'");
+while($b = mysql_fetch_array($bacteria)){
+    $circuit = mysql_query("SELECT * FROM cctframe WHERE circuitno='$b[circuitno]'");
+    while($c = mysql_fetch_array($circuit))
+             {
+		      $cnumber++; 
+
+		      $result=mysql_query("SELECT * FROM biobrickinfo WHERE codingframeid='$c[codingframeid]'");
+              while($r = mysql_fetch_array($result))
+                   {
+				          if($i>0)
+							  {
+				          $position[$i]=$r['codingframeid']%$start + 1;
+						      }
+							  else
+					          {
+								  $position[$i]=$r['codingframeid'];
+								  $start=$position[$i];
+								  $position[$i]=$r['codingframeid']%$start + 1;
+
+							  }
+
+		                  switch($r['DNAproperty'])
+			                 {
+			                   case'promoter':
+				                  $new[$i]=1;
+                                  break;
+		                       case'protein coding':
+				                  $new[$i]=2;
+                                  break;
+                               case'RBS coding':
+				                  $new[$i]=3;
+			                      break;
+                               case'terminator coding':
+				                  $new[$i]=4;
+			                      break;
+		                    }
+			              $i++;
+	                }
+	                    
+            } 
+}
+$test = implode (",",$new);//将codingrame按顺序依次排列
+$test1 = implode (",",$position);//每个biobrick所属的codingframe
+
+
+
+$bacteria1 = mysql_query("SELECT * FROM ecocct WHERE Ecoid='Eco000_58'");
+while($b1 = mysql_fetch_array($bacteria1)){
+	$circuit1 = mysql_query("SELECT * FROM cctframe WHERE circuitno='$b1[circuitno]'");
+	while($c1 = mysql_fetch_array($circuit1))
+		  {
+	    $brickid = mysql_query("SELECT * FROM biobrickinfo WHERE codingframeid='$c1[codingframeid]'");
+		while($id =mysql_fetch_array($brickid))
+			  {
+			$tar=mysql_query("SELECT * FROM relation WHERE target='$id[biobrickID]'");
+			while($t=mysql_fetch_array($tar))
+				  {
+				
+				$target[$j]=$id['order'];//目标
+
+                switch($t['realation'])
+					  {
+					case '+':
+                    $relation[$j]=1;
+					break;
+
+					case '-':
+                    $relation[$j]=0;
+					break;
+
+					  }//关系
+
+
+				$position1[$j]=$id['codingframeid']%$start + 1;
+
+				$j++;
+				
+				$stimu=mysql_query("SELECT * FROM substance WHERE substanceno='$t[stimulation]'");
+				while($s=mysql_fetch_array($stimu))
+					  {
+					$stimulation[$k]=$s['substancename'];
+					$k++;
+
+				$siu=mysql_query("SELECT * FROM expression WHERE substanceno='$t[stimulation]'");
+			if($s=mysql_fetch_array($siu))
+				  {
+				$protein[$l]=$s['order'];
+				$position2[$l]=$s['codingframeID']%$start + 1;
+				  }
+				  else
+							  {
+								$protein[$l]=0;
+                                $position2[$l]=0;
+							  }
+							$l++;
+
+					
+					  }//刺激物质
+
+			
+		
+
+				   }//relation
+				
+			    }//biobrickinfo
+				
+				
+			}//cctframe
+        
+
+	}//ecoct
+	$mubiao = implode (",",$target);//target目标
+	$guanxi = implode (",",$relation);//relation
+	$ciji = implode(",",$stimulation);//stimulation
+	$sz = implode(",",$protein);//内外部及位置
+	$test2= implode(",",$position1);//target--codingframe
+	$test3= implode(",",$position2);//stimulation--codingframe
+	
+	
+//获取靶目标及其关系
+echo $cnumber;
+?>
+
+<style type="text/css">
+
+
+
+table.footcollapse{
+	width:600px;
+}
+
+table.footcollapse th{
+	text-align:left;
+}
+
+table.footcollapse,table.footcollapse th,table.footcollapse th
+{
+	border:none;
+	border-collapse:collapse;	
+}
+
+
+table.footcollapse tfoot td
+{
+	border-left-style:solid;
+	border-right-style:solid;
+	border-width:1px;
+	border-color: #FFF #FFF #FFF;
+	padding:2px 10px;
+}
+table.footcollapse tbody{
+	background:#888;
+}
+table.footcollapse tbody td{
+	padding:5px 10px;
+	border:1px solid #999;
+	color:#FFF;
+}
+
+
+table.footcollapse tfoot td img{
+	border:none;
+	vertical-align:bottom;
+	padding-left:10px;
+	float:right;
+}
+
+
+</style>
+<script type="text/javascript">
+     //var cf=new Array(1,1,1,3,4,2,2,3,3,1,2,3,4);	
+	  var ak="<?php echo $test; ?>"; 
+	  var cf = new Array();
+      cf=ak.split(",");//codingframe 的顺序
+
+
+     //var reactant =new Array(1,3,5,0,0,10,0);
+	 var bk="<?php echo $sz; ?>";
+	 var reactant = new Array();
+	 reactant=bk.split(",");//产生物质的顺序
+
+
+	 //var product=new Array(4,6,2,4,6,13,11);
+	 var ck="<?php echo $mubiao; ?>";
+	 var product = new Array();
+     product=bk.split(",");//受刺激的顺序*
+
+
+	 //var relatype=new Array(0,1,0,1,0,1,0);
+	 var dk="<?php echo $guanxi; ?>";
+	 var relatype = new Array();
+     relatype=dk.split(",");//关系
+
+	 //var condition=new Array('protein1','protein2','protein3','sunlight','presure','protein4','sound');
+	 var ek="<?php echo $ciji; ?>";
+	 var relatype = new Array();
+     relatype=ek.split(",");//条件
+
+	 var countid=new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21);
+
+	//var cftype=new Array(1,1,1,1,1,1,1,1,1,2,2,2,2);
+	var fk="<?php echo $test1; ?>";
+	 var cftype = new Array();
+     cftypek=ek.split(",");//不同的codingframe
+	 
+	 var can_width=720;
+	 
+	 function canvas(){
+		var countstrain=cftype.length;
+		var lastnum=2*cftype[countstrain-1];
+		can_width=80*(countstrain+lastnum);
+		if(countstrain>9){
+			can_width=80*(countstrain+lastnum);
+			obj=document.getElementById('canvas');
+			obj.width=can_width;
+		}
+	}
+	
+    function drawline( x1,y1,x2,y2){
+	   
+	   var ctx=document.getElementById('canvas').getContext('2d');
+	   ctx.strokeStyle="#999"
+	   ctx.lineWidth=1;
+	   ctx.beginPath();
+	   ctx.moveTo(x1,y1);
+	   ctx.lineTo(x2,y2);
+	   ctx.stroke();
+	  
+	}
+	function drawgrid(){
+		
+		for(a=0;a<=can_width;a=a+80){
+			drawline(a,0,a,320);
+		}
+		for(b=0;b<=320;b=b+40){
+			drawline(0,b,can_width,b);
+		}		
+	}
+	
+	function drawimg(getype,id,left){
+	    if (getype==1)
+		ab="img/promoter.png"	;
+		else if (getype==2)
+		ab="img/protein coding.png"	;
+		else if (getype==3)
+		ab="img/rbs.png"	;
+		else if (getype==4)
+		ab="img/terminater.png"	;
+		var obj=document.getElementById(id);
+		obj.src=ab;
+		left=left*80+"px"
+		obj.style.left=left;
+		}
+	
+	
+	 function readcircuit(){
+			
+			var dd=1;
+			var img=new Array();
+			var left=0;	 
+		    for (b=0;b<cf.length;b++){
+			 left=dd+(cftype[b]-1)*2	 
+     		 drawimg(cf[b],dd,left);
+			 dd=dd+1;
+			}
+	 }
+function drawnewrela(reactantid,productid,relatype,condition,h){
+	var ctx=document.getElementById('canvas').getContext('2d');	
+	var obj2=document.getElementById(productid);
+	var x2=obj2.offsetLeft;
+	var y2=obj2.offsetTop;
+	if(reactantid==0){
+    ctx.strokeStyle="#FFF"
+	ctx.lineWidth=6;
+	ctx.beginPath();
+	ctx.moveTo(x2,y2-h);
+	ctx.lineTo(x2+60,y2-h);
+	ctx.lineTo(x2+60,y2-9);
+	ctx.stroke();
+	ctx.beginPath();
+	   if(relatype==0){
+	       ctx.moveTo(x2+50,y2-9);
+	       ctx.lineTo(x2+70,y2-9);
+	       ctx.stroke();}
+	   else if(relatype==1){
+		   ctx.moveTo(x2+60,y2-4);
+		   ctx.lineTo(x2+47,y2-24);
+		   ctx.lineTo(x2+73,y2-24);
+		   ctx.moveTo(x2+60,y2-4);
+		   ctx.lineTo(x2+73,y2-24);
+		   ctx.fill();
+			}
+	
+	ctx.fillStyle="white"
+	ctx.font='20px Georgia';
+	ctx.fillText(condition,x2+10,y2-h-10);
+	ctx.fill();
+	
+	}
+	
+	else{
+	var obj1=document.getElementById(reactantid);
+	  var x1=obj1.offsetLeft;
+	  var y1=obj1.offsetTop;
+	  ctx.strokeStyle="#FFF"
+	  ctx.lineWidth=6;
+	  ctx.beginPath();
+	     if(y1<=y2){
+	       ctx.moveTo(x1+40,y1);
+	       ctx.lineTo(x1+40,y1-h);
+	       ctx.lineTo(x2+40,y1-h);
+	       ctx.lineTo(x2+40,y2-9);
+	       ctx.stroke();
+	       ctx.beginPath();
+	         if(relatype==0){
+	           ctx.moveTo(x2+30,y2-9);
+	           ctx.lineTo(x2+50,y2-9);
+	           ctx.stroke();}
+	         else if(relatype==1){
+		       ctx.moveTo(x2+40,y2-4);
+		       ctx.lineTo(x2+27,y2-24);
+		       ctx.lineTo(x2+53,y2-24);
+		       ctx.moveTo(x2+40,y2-4);
+		       ctx.lineTo(x2+53,y2-24);
+		       ctx.fill();
+			}
+	      }
+	
+	     else{
+	         ctx.moveTo(x1+40,y1);
+	         ctx.lineTo(x1+40,y2-h);
+	         ctx.lineTo(x2+40,y2-h);
+	         ctx.lineTo(x2+40,y2-9);
+	         ctx.stroke();
+	         ctx.beginPath();
+	          if(relatype==0){
+	             ctx.moveTo(x2+30,y2-9);
+	             ctx.lineTo(x2+50,y2-9);
+	             ctx.stroke();}
+	          else if(relatype==1){
+		         ctx.moveTo(x2+40,y2-4);
+		         ctx.lineTo(x2+27,y2-24);
+		         ctx.lineTo(x2+53,y2-24);
+		         ctx.moveTo(x2+40,y2-4);
+		         ctx.lineTo(x2+53,y2-24);
+		         ctx.stroke();
+			  }
+	      }
+	
+	 ctx.fillStyle="white"
+	 ctx.font='20px Georgia';
+	 ctx.fillText(condition,x1+5,y1-h-10);
+	 ctx.fill();
+}
+}
+
+function drawtest(){
+	var ctx=document.getElementById('canvas').getContext('2d');
+	ctx.clearRect(0,0,800,400);
+	var h=30;
+	var count=1;
+	for(i=0;i<=reactant.length;i++){
+		if(cftype[reactant[i]]>count){
+			h=30;
+			count=count+1;
+		}
+		drawnewrela(reactant[i],product[i],relatype[i],condition[i],h)
+		h=h+40;
+	}
+}
+	 
+
+function correction(f){
+
+		obj=document.getElementById(f);
+		x=obj.offsetLeft	
+		x1=x-80*(parseInt(x/80))	
+		if(x1%80<=40){
+			x=x-x1;}
+		else {x=x-x1+80;}
+		x0=x
+		
+		y=obj.offsetTop
+		y1=y-parseInt(y/40)*40;
+		if(y%40<=20){
+			y=y-y1}
+		else {y=y-y1+40}	
+		y0=y;
+		if(x0<0||y0<0){
+			for(e=0;e<=reactant.length;e++){
+				if(reactant[e]==f){
+					reactant.splice(e,1);
+					condition.splice(e,1);
+					relatype.splice(e,1);
+					product.splice(e,1);
+				}
+				else if(product[e]==f){
+					product.splice(e,1);
+					reactant.splice(e,1);
+					condition.splice(e,1);
+					relatype.splice(e,1);
+				}
+				
+			}
+			for(e=0;e<=countid.length;e++){
+				if(countid[e]==f){
+					countid.splice(e,1);
+				}
+			}
+			obj.parentNode.removeChild(obj);
+			
+		
+		} 
+
+		x0=x0+"px";
+		y0=y0+"px";
+		obj.style.left=x0;
+		obj.style.top=y0;
+	
+	}
+	function correctiontest(){
+		for(e=0; e<=countid.length;e++){
+			correction(countid[e]);
+		}
+		
+	}
+
+
+function myfunction(){
+	
+	drawtest();
+	
+}
+</script>
+
+<script>
+    var name=new Array('hey','ni','hao','ma','wo','ca', 'lei','hao');
+	var number=new Array(1234,23434,23421,10003,2983,90823,2345,2345);
+    var description=new Array('hehehe','xixixi','hahaha','houhouhou','heiheihei','lalala','gagaga','papapa');
+function information(obj){
+	
+	var id=obj.id;
+	var obj5=document.getElementById('td1');
+	obj5.innerHTML="name:"+name[id-1];
+	
+	var obj6=document.getElementById('td2');
+	obj6.innerHTML="number:"+number[id-1];
+	
+	var obj7=document.getElementById('td3');
+	obj7.innerHTML="description:"+description[id-1];
+}
+</script>
+<script type="text/javascript"  src="js/163css.js"></script>
+
+<script src="js/jquery-1.3.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+    $("#panel div.head").toggle(function(){
+	     $(this).next().hide(400);
+	},function(){
+	     $(this).next().show(400);
+	})
+})
+
+</script>
+<script language="javascript">
+function tablecollapse()
+{
+	/* Variables */
+	var collapseClass='footcollapse';
+	var collapsePic='http://www.webjx.com/upfiles/20070619/20070619214338_arrow_up.gif';
+	var expandPic='http://www.webjx.com/upfiles/20070619/20070619214348_arrow_down.gif';
+	var initialCollapse=true;
+
+	// loop through all tables
+	var t=document.getElementsByTagName('table');
+	var checktest= new RegExp("(^|\\s)" + collapseClass + "(\\s|$)");
+	for (var i=0;i<t.length;i++)
+	{
+		// if the table has not the right class, skip it
+		if(!checktest.test(t[i].className)){continue;}		
+
+		// make the footer clickable
+		t[i].getElementsByTagName('tfoot')[0].onclick=function()
+		{
+			// loop through all bodies of this table and show or hide 
+			// them
+			var tb=this.parentNode.getElementsByTagName('tbody');
+			for(var i=0;i<tb.length;i++)
+			{
+				tb[i].style.display=tb[i].style.display=='none'?'':'none';
+			}			
+			// change the image accordingly
+			var li=this.getElementsByTagName('img')[0];
+			li.src=li.src.indexOf(collapsePic)==-1?collapsePic:expandPic;	
+		}
+		// if the bodies should be collapsed initially, do so
+		if(initialCollapse)
+		{
+			var tb=t[i].getElementsByTagName('tbody');
+			for(var j=0;j<tb.length;j++)
+			{
+				tb[j].style.display='none';
+			}			
+		}
+		// add the image surrounded by a dummy link to allow keyboard 
+		// access to the last cell in the footer
+		var newa=document.createElement('a');
+		newa.href='#';
+		newa.onclick=function(){return false;}
+		var newimg=document.createElement('img');
+		newimg.src=initialCollapse?expandPic:collapsePic;
+		var tf=t[i].getElementsByTagName('tfoot')[0];
+		var lt=tf.getElementsByTagName('td')[tf.getElementsByTagName('td').length-1];
+		newa.appendChild(newimg);
+		lt.insertBefore(newa,lt.firstChild);
+	}		
+}
+// run tablecollapse when the page loads
+
+
+</script>
+<script>
+function navi(obj){
+	var newid=obj.id;
+	var newobj=new Array();
+	obj.width="195";
+	obj.height="70";
+	var newa=parseInt(newid);
+	newa=newa+1;
+	for(newa;newa<=103;newa++){
+		newobj[newa]=document.getElementById(newa);
+		var b=newobj[newa].offsetTop;
+		b=b+20+"px"
+		newobj[newa].style.top=b;
+	}
+}
+function navi1(obj){
+	var newid=obj.id;
+	var newobj=new Array();
+	obj.width="150";
+	obj.height="50";
+	var newa=parseInt(newid);
+	newa=newa+1;
+	for(newa;newa<=103;newa++){
+		newobj[newa]=document.getElementById(newa);
+		var b=newobj[newa].offsetTop;
+		b=b-20+"px"
+		newobj[newa].style.top=b;
+	}
+}
+function button(obj){
+	var xbutton= obj.id;
+	if(xbutton==200){
+		var src1="img/grid按下.png";
+		obj.src=src1;
+	}
+	if(xbutton==201){
+		var src2="img/run按下.png";
+		obj.src=src2;
+	}
+	if(xbutton==202){
+		var src3="img/correction按下去.png";
+		obj.src=src3;
+	}
+}
+function button1(obj){
+	var xbutton= obj.id;
+	if(xbutton==200){
+		var src1="img/grid没按下.png";
+		obj.src=src1;
+	}
+	if(xbutton==201){
+		var src2="img/run没按下.png";
+		obj.src=src2;
+	}
+	if(xbutton==202){
+		var src3="img/correction没按下.png";
+		obj.src=src3;
+	}
+}
+</script>
+
+</head>
+
+<body onload=" canvas();readcircuit();tablecollapse();drawtest()" >
+
+<div id="container">
+ 
+    <div id="header">
+			<img id="logo" src="img/logo.png" title="logo" />
+			<span id="search">
+				<a href=""><img src="img/search.png" title="search" /></a>
+				<input type="text" value="SEARCH" onfocus="if (value =='SEARCH'){value ='';this.style.color='#000'}" onblur="if (value ==''){value='SEARCH';this.style.color='#bbb'}" />
+			</span>
+			<span id="navi">
+				<a href="index.html" title="">HOME</a>
+				<a href="about.html" title="">ABOUT</a>
+			</span>
+		</div>
+	
+  <div id="midcontainer">
+   <div id="midcontainer1">	
+   
+    <img src="img/LGD字体.png" style=" left:10px; top:10px"  id="99" width="120" height="45"/>
+  <a href="Browse.html">  <img src="img/Browse.png" style="left:5px ; top:135px" id="101" width="150" height="50" onmouseover="navi(this)" onmouseout="navi1(this)" /></a>
+    <img src="img/Design.png" style="left:5px ; top:60px" id="100" width="195" height="70" />
+    <img src="img/Tutorial.png" style="left:5px ; top:190px" id="102" width="150" height="50" onmouseover="navi(this)" onmouseout="navi1(this)"/>
+    <img src="img/About.png" style="left:5px ; top:245px" id="103" width="150" height="50" onmouseover="navi(this)" onmouseout="navi1(this)"/>
+    <div id="middle1">
+    <div id="midtop">
+    <img src="img/标题1.png" style="left:-2px; top:0px;" width="978" height="33"/>
+    </div>
+    <div id="middle">
+        <div id="left">
+        <div id="panel" style="margin-top:5px;">
+	       <div class="head" id="library" ></div>
+	       <div class="content" id="content">
+           
+           <ol class="tree">
+		<li>
+			<label for="folder1">Promoter</label> <input type="checkbox"  id="folder1" /> 
+			<ol>
+				<li class="file"><a href="">File 1</a></li>
+				<li>
+					<label for="subfolder1">Subfolder 1</label> <input type="checkbox" id="subfolder1" /> 
+					<ol>
+						<li class="file"><a href="">Filey 1</a></li>
+						<li>
+							<label for="subsubfolder1">Subfolder 1</label> <input type="checkbox" id="subsubfolder1" /> 
+							<ol>
+								<li class="file"><a href="">File 1</a></li>
+								<li>
+									<label for="subsubfolder2">Subfolder 1</label> <input type="checkbox" id="subsubfolder2" /> 
+									<ol>
+										<li class="file"><a href="">Subfile 1</a></li>
+										<li class="file"><a href="">Subfile 2</a></li>
+										<li class="file"><a href="">Subfile 3</a></li>
+										<li class="file"><a href="">Subfile 4</a></li>
+										<li class="file"><a href="">Subfile 5</a></li>
+										<li class="file"><a href="">Subfile 6</a></li>
+									</ol>
+								</li>
+							</ol>
+						</li>
+						<li class="file"><a href="">File 3</a></li>
+						<li class="file"><a href="">File 4</a></li>
+						<li class="file"><a href="">File 5</a></li>
+						<li class="file"><a href="">File 6</a></li>
+					</ol>
+				</li>
+			</ol>
+		</li>
+		<li>
+			<label for="folder2">Terminater</label> <input type="checkbox" id="folder2" /> 
+			<ol>
+				<li class="file"><a href="">File 1</a></li>
+				<li>
+					<label for="subfolder2">Subfolder 1</label> <input type="checkbox" id="subfolder2" /> 
+					<ol>
+						<li class="file"><a href="">Subfile 1</a></li>
+						<li class="file"><a href="">Subfile 2</a></li>
+						<li class="file"><a href="">Subfile 3</a></li>
+						<li class="file"><a href="">Subfile 4</a></li>
+						<li class="file"><a href="">Subfile 5</a></li>
+						<li class="file"><a href="">Subfile 6</a></li>
+					</ol>
+				</li>
+			</ol>
+		</li>
+		<li>
+			<label for="folder3">Protein Coding</label> <input type="checkbox" id="folder3" /> 
+			<ol>
+				<li class="file"><a href="">File 1</a></li>
+				<li>
+					<label for="subfolder3">Subfolder 1</label> <input type="checkbox" id="subfolder3" /> 
+					<ol>
+						<li class="file"><a href="">Subfile 1</a></li>
+						<li class="file"><a href="">Subfile 2</a></li>
+						<li class="file"><a href="">Subfile 3</a></li>
+						<li class="file"><a href="">Subfile 4</a></li>
+						<li class="file"><a href="">Subfile 5</a></li>
+						<li class="file"><a href="">Subfile 6</a></li>
+					</ol>
+				</li>
+			</ol>
+		</li>
+		<li>
+			<label for="folder4">RBS</label> <input type="checkbox" id="folder4" /> 
+			<ol>
+				<li class="file"><a href="">File 1</a></li>
+				<li>
+					<label for="subfolder4">Subfolder 1</label> <input type="checkbox" id="subfolder4" /> 
+					<ol>
+						<li class="file"><a href="">Subfile 1</a></li>
+						<li class="file"><a href="">Subfile 2</a></li>
+						<li class="file"><a href="">Subfile 3</a></li>
+						<li class="file"><a href="">Subfile 4</a></li>
+						<li class="file"><a href="">Subfile 5</a></li>
+						<li class="file"><a href="">Subfile 6</a></li>
+					</ol>
+				</li>
+			</ol>
+		</li>
+	</ol>
+           
+           
+           
+           
+           
+           </div>
+       </div>
+     
+                         
+        </div>
+  <div id="right">
+    <div id="righttop">
+         <div id="canvascontainer">
+         <div id="forcanvas">
+      
+           <canvas width="720" height="320" id="canvas">你的浏览器无法显示此信息</canvas>
+            <img id="1"  src="" style="top: 240px"  onmousedown="move(this,event)" onmouseover="information(this)"/>
+           <img id="2"  src="" style="top: 240px" onmousedown="move(this,event)" onmouseover="information(this)" />
+           <img id="3" src="" style="top: 240px" onmousedown="move(this,event)"  onmouseover="information(this)"/>
+           <img id="4"  src="" style="top: 240px" onmousedown="move(this,event)" onmouseover="information(this)"/>
+           <img id="5" src="" style="top: 240px" onmousedown="move(this,event)" onmouseover="information(this)" />
+           <img id="6" src="" style="top: 240px" onmousedown="move(this,event)" onmouseover="information(this)"/>
+           <img id="7"  src="" style="top: 240px" onmousedown="move(this,event)" onmouseover="information(this)"/>
+           <img id="8"  src="" style="top: 240px" onmousedown="move(this,event)" onmouseover="information(this)"/>
+           <img id="9"  src="" style="top: 240px" onmousedown="move(this,event)" onmouseover="information(this)"/>
+           <img id="10"  src="" style="top:240px" onmousedown="move(this,event)" onmouseover="information(this)"/> 
+           <img id="11"  src="" style="top:240px" onmousedown="move(this,event)" onmouseover="information(this)"/> 
+           <img id="12"  src="" style="top:240px" onmousedown="move(this,event)" onmouseover="information(this)"/> 
+           <img id="13"  src="" style="top:240px" onmousedown="move(this,event)" onmouseover="information(this)"/> 
+           <img id="14"  src="" style="top:240px" onmousedown="move(this,event)" onmouseover="information(this)"/> 
+           <img id="15"  src="" style="top:240px" onmousedown="move(this,event)" onmouseover="information(this)"/> 
+           <img id="16"  src="" style="top:240px" onmousedown="move(this,event)" onmouseover="information(this)"/>  
+         </div>
+         </div>
+          <div id="forbutton">
+           <img src="img/grid没按下.png" height="20" width="72" style="left:205px; top:7px"  id="200" onclick="drawgrid()" onmouseover="button(this)" onmouseout="button1(this)"/>
+           <img src="img/run没按下.png" height="20" width="72" style="left:312px; top:7px" id="201" onclick="myfunction()" onmouseover="button(this)" onmouseout="button1(this)"/>
+           <img src="img/correction没按下.png" height="20" width="72" style="left:419px; top:7px" id="202" onclick="correctiontest()" onmouseover="button(this)" onmouseout="button1(this)"/>
+          
+          </div> 
+    </div>
+  
+    <div id="rightbottom">
+      <table  class="footcollapse">
+      <thead><tr><th background="img/infromation.png"  height="25" width="600"></th></tr></thead>
+      <tbody>
+      <tr ><td id="td1" bgcolor="#111">name:</td></tr>
+      <tr><td id="td2" bgcolor="#222">number:</td></tr>
+      <tr><td id="td3" bgcolor="#111">description</td></tr>
+      </tbody>
+      <tfoot>
+      <tr id="tr1"><td bgcolor="#222"></td>
+
+      </tr>
+      </tfoot>
+      </table>
+    </div>
+  </div>
+ </div>
+ </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

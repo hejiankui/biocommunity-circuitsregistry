@@ -1,0 +1,14 @@
+#menu1 {font-family: arial, sans-serif;font-size:11px;}
+#menu1 ul li a, .menu1 ul li a:visited {display:block; text-decoration:none; color:#000;width:104px; height:20px; text-align:center; color:#fff; border:1px solid #fff; background:#710069; line-height:20px; font-size:11px; overflow:hidden;}
+#menu1 ul {padding:0; margin:0;list-style-type: none; }
+#menu1 ul li {float:left; margin-right:1px; position:relative;}
+#menu1 ul li ul {display: none;}
+#menu1 ul li:hover a {color:#fff; background:#36f;}
+#menu1 ul li:hover ul {display:block; position:absolute; top:21px; left:0; width:105px;}
+#menu1 ul li:hover ul li a.hide {background:#6a3; color:#fff;}
+#menu1 ul li:hover ul li:hover a.hide {background:#6fc; color:#000;}
+#menu1 ul li:hover ul li ul {display: none;}
+#menu1 ul li:hover ul li a {display:block; background:#ddd; color:#000;}
+#menu1 ul li:hover ul li a:hover {background:#6fc; color:#000;}
+#menu1 ul li:hover ul li:hover ul {display:block; position:absolute; left:105px; top:0;}
+#menu1 ul li:hover ul li:hover ul.left {left:-105px;}

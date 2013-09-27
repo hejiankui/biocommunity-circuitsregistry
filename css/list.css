@@ -1,0 +1,31 @@
+
+
+
+
+.clearfix:after{content:"\20";clear:both;height:0;display:block;overflow:hidden}.clearfix{*zoom:1}
+.clear{font-size:0;line-height:0;height:0;overflow:hidden;clear:both;visibility:hidden}
+.fl,.mark{float:left}.fr,.subMark{float:right}
+
+.mb10{margin-bottom:10px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+.cp{cursor:pointer;}
+/* scrolltab */
+.scrolltab{position:relative;width:1200px; height:435px; overflow:hidden; }
+.scrolltab .ulBigPic{width:1088px;height:435px; padding-left:60px;overflow:hidden;}
+.scrolltab .ulBigPic li{width:1088px;height:435px;display:none; text-align:center}
+.scrolltab .ulBigPic .liSelected{display:block;}
+.scrolltab .ulBigPic img{border:1px solid #dedede;background-color:#fff;}
+.scrolltab .ulBigPic .sPic{width:757px;float:left;overflow:hidden;}
+
+
+.scrolltab .sLeftBtnA,.scrolltab .sLeftBtnASel,.scrolltab .sLeftBtnABan,.scrolltab .sRightBtnA,.scrolltab .sRightBtnASel,.scrolltab .sRightBtnABan{width:38px;height:86px;display:block;position:absolute;top:175px;background:url(../img/bgArt1.png) no-repeat;}
+.scrolltab .sLeftBtnA,.scrolltab .sLeftBtnASel,.scrolltab .sRightBtnA,.scrolltab .sRightBtnASel{cursor:pointer;}
+.scrolltab .sLeftBtnA,.scrolltab .sLeftBtnASel,.scrolltab .sLeftBtnABan{left:10px;}
+.scrolltab .sLeftBtnA{background-position:-5px -2px;}
+.scrolltab .sLeftBtnASel{background-position:-80px 0;}
+.scrolltab .sLeftBtnABan{background-position:-161px 0;}
+.scrolltab .sRightBtnA,.scrolltab .sRightBtnASel,.scrolltab .sRightBtnABan{right:10px;}
+.scrolltab .sRightBtnA{background-position:-36px 0;}
+.scrolltab .sRightBtnASel{background-position:-116px 0;}
+.scrolltab .sRightBtnABan{background-position:-192px 0;}
