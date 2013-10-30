@@ -1,0 +1,127 @@
+
+.pull-right {
+  float: right;
+}
+
+.img-rounded img {
+  border-radius: 500px;
+}
+
+.user-avatar {
+  float: left;
+}
+
+.user-avatar.small {
+  margin: -4px;
+}
+
+.user-avatar.small img {
+  height: 21px;
+}
+
+.item .user-avatar.small {
+  margin-right: 6px;
+}
+
+.container.index {
+  height: 300px;
+}
+
+.example.field {
+  border-top: none !important;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.example img {
+  max-width: 100%;
+}
+
+#searchfield {
+  z-index: 101;
+}
+
+#overview #searchfield {
+  margin-bottom: 10px;
+}
+
+.highlight {
+  color: red;
+  background-color: #F6F3D5;
+  font-weight: 700;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 0.325em 0.325em 0.325em 0.325em;
+  -moz-border-radius: 0.325em 0.325em 0.325em 0.325em;
+  border-radius: 0.325em 0.325em 0.325em 0.325em;
+}
+
+.index-header {
+  height: 300px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.index .logo img {
+  max-width: 80%;
+}
+
+.band.logo {
+  width: 201px;
+  height: 40px;
+  margin: 0 auto;
+  background-image: url('/static/img/band.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 201px 40px;
+}
+
+.ui.grid > .row.search {
+  padding-top: 0;
+}
+
+@media only screen and (max-width : 900px) {
+  .band.logo {
+    width: 40px;
+    background-image: url('/static/img/band-icon.png');
+    background-size: 40px 40px;
+  }
+  .index-header {
+    height: 200px;
+  }
+
+  .ui.grid > .row.search > .column:first-child {
+    display: none;
+  }
+  .ui.grid > .row.search > .column {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width : 1050px) {
+#sidebar.peek {
+  position: relative;
+  left: 0;
+}
+}
+
+@media only screen and (min-width : 1051px) and (max-width : 1725px) {
+  #example .container.page, #example .container.circuit {
+    margin-left: 325px;
+  }
+}
+
+#mindmap.main.container {
+  margin: -28px 2px 2px;
+  padding-bottom: 0px;
+  min-height: 300px;
+  width: auto;
+}
+
+.feedback {
+  max-width: 42em;
+  margin: 0 auto;
+}

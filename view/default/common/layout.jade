@@ -1,0 +1,102 @@
+doctype 5
+html
+  head
+    meta(charset='utf-8')
+    if (navtitle) 
+      title #{navtitle} - #{_G['setting']['sitename']}
+    else 
+      title #{_G['setting']['sitename']}
+
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='keywords', content='CircuitPlus,BioMiao,SUSTC')
+    meta(name='description', content='CircuitPlus')
+
+    link(rel='shortcut icon', href='/favicon.ico')
+    link(rel='stylesheet', href='/static/css/all.min.css?v=#{_G['version']['css']}')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700', type='text/css')
+    block stylesheet
+
+    //if lt IE 9
+      script(src='/static/js/html5shiv.js')
+
+  body#example
+    div.ui.fixed.transparent.inverted.main.menu
+      div.container
+        a.brand(href='#')= _G['setting']['sitename']
+        div.right.menu
+          if (_G['uid'])
+            div.ui.dropdown.link.item(class=($_G['basescript'] == 'user' ? 'active' : ''), href='/user')
+              div.user-avatar.small.img-rounded
+                if (_G['member']['avatar_url'])
+                  img(src=_G['member']['avatar_url'])
+                else
+                  img(src='/static/img/user/def-avatar.png')
+              | #{_G['username']}
+              i.icon.dropdown
+              div.menu
+                a.icon.item(href='/user')
+                  i.user.icon
+                  | Profile
+                a.icon.item(href='/user/settings')
+                  i.settings.icon
+                  | Settings
+                div.item.divider
+                a.icon.item(href='/user/logout?formhash=#{_G['formhash']}')
+                  i.sign.out.icon
+                  | Logout
+          else
+            a.item.icon(class=($_G['basescript'] == 'user' ? 'active' : ''), href='/user/signin?t=#{_G['timestamp']}')
+              i.icon.user
+              | Sign in
+        a.item.icon(class=($_G['basescript'] == 'index' ? 'active' : ''), href='/')
+          i.icon.home
+          | Home
+        div.ui.dropdown.link.item(class=($_G['basescript'] == 'circuit' ? 'active' : ''), href='/circuit')
+          | Circuit
+          i.icon.dropdown
+          div.menu
+            a.icon.item(href='/circuit')
+              i.list.layout.icon
+              | List
+            a.icon.item(href='/circuit/mindmap')
+              i.circle.blank.icon
+              | Mindmap
+        a.desktop.item(class=(($_G['basescript'] == 'page' && CURMODULE == 'apis') ? 'active' : ''), href='/page/apis') APIs
+        a.desktop.item(class=(($_G['basescript'] == 'page' && CURMODULE == 'tutorial') ? 'active' : ''), href='/page/tutorial') Tutorial
+
+    div.header
+      block bodyheader
+
+    div.main.container(class=_G['basescript'], id=(($_G['basescript'] == 'circuit') ? CURMODULE : ''))
+      block content
+
+    block other-content
+
+    div.footer
+      div.ui.divider
+      div.ui.divided.horizontal.footer.link.list
+        div.item &copy; SUSTC-ShenZhen-B
+        a.item(href='/page/privacypolicy') PrivacyPolicy
+        a.item(href='/page/about') About
+        a.item(href='/page/thanks') Thanks
+
+    script(src='/static/js/all.min.js?v=#{_G['version']['js']}')
+    block script
+    script(type='text/javascript').
+      $(document).ready(function () {
+        $menuDropdown = $('.ui.main.menu .dropdown');
+        $menuDropdown.dropdown({
+            on         : 'hover',
+            action     : 'none'
+          })
+        ;
+      });
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-33507165-2', 'circuitplus.org');
+      ga('send', 'pageview');

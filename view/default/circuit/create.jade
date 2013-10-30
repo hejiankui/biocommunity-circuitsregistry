@@ -1,0 +1,18 @@
+extends ../common/layout
+
+block bodyheader
+  include searchheader
+
+block script
+  script(src='/static/js/searchbox.js?v=#{_G['version']['js']}')
+  script(src='/static/js/circuit-create.js?v=#{_G['version']['js']}')
+
+block content
+  include sidebar
+  .ui.piled.segment
+    h2.header Create
+
+    .ui.icon.error.message
+      i.icon.exclamation
+      .content
+        p You donnot have the permission to perform the operation.

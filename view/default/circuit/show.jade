@@ -1,0 +1,300 @@
+extends ../common/layout
+
+block bodyheader
+  div.tab.segment
+    div.container#overview
+      include ../common/searchfield
+      div.inverted.pull-right
+        a.ui.purple.large.labeled.button(href='/circuit/get/sbol/#{circuit['id']}')
+          i.cloud.download.icon
+          | Export to SBOL
+      div.introduction
+        h1.ui.dividing.header= circuit['id']
+        p(class='lead')= circuit['name']
+      .four.item.tabular.ui.menu
+        a.active.item(data-tab="information") Information
+        a.item(data-tab="lgd") LGD
+        a.item(data-tab="feedback") Feedback
+        a.item(data-tab="comment") Comment
+
+block stylesheet
+  link(rel='stylesheet', href='/static/css/lgd.css?v=#{_G['version']['css']}')
+
+block script
+  script(src='/static/js/jquery.tablesort.min.js?v=#{_G['version']['js']}')
+  script(src='/static/js/waypoints.js?v=#{_G['version']['js']}')
+  script(src='/static/js/waypoints-ready.js?v=#{_G['version']['js']}')
+  script(src='/static/js/table.js?v=#{_G['version']['js']}')
+  script(src='/static/js/circuit-show.js?v=#{_G['version']['js']}')
+  script(src='/static/js/lgd.js?v=#{_G['version']['js']}')
+  script(src='/static/js/searchbox.js?v=#{_G['version']['js']}')
+  script(type='text/javascript').
+    var circuit_lgd = !{circuit['lgd']};
+    $(document).ready(function () {
+      if (circuit_lgd) {
+        init_lgd(circuit_lgd);
+      }
+    });
+
+block content
+  if (circuit)
+    .ui.tab.active(data-tab="information")
+      div.peek
+        div.ui.vertical.pointing.secondary.menu
+          a.active.item Basic information
+          a.item Circuit construct
+          a.item Reference
+
+      div.span9
+        h2.ui.dividing.header Basic information
+        .example
+          h3.ui.header Author
+          if (circuit['author'])
+            p= circuit['author']
+          if (circuit['user'])
+            a.ui.image.label(href='/user/#{circuit['user']['uid']}', target='_blank')
+              if (circuit['user']['avatar_url'])
+                img(src=circuit['user']['avatar_url'])
+              else
+                img(src='/static/img/user/def-avatar.png')
+              = circuit['user']['username']
+              .detail Uploaded
+        .example
+          h3.ui.header Rating
+          .ui.star.rating(data-rating=circuit['rating'])
+            i.icon
+            i.icon
+            i.icon
+            i.icon
+            i.icon
+        .example
+          h3.ui.header Classification
+          if (circuit['classification'])
+            .ui.small.steps
+              - foreach (array_reverse($circuit['classification']) as $value)
+                a.ui.step.next(href='/term/classification/' + value['classification_id'], target='_blank')= value['name']
+          else
+            p ---
+
+        //section(id='basic')
+        .example
+          h3.ui.header Tags
+          each tag in circuit['tags']
+            .ui.icon.label
+              i.icon.tag
+              a(href='/term/tag/' + tag['term_id'], target='_blank')= tag['name']
+        .example
+          h3.ui.header Chassis and plasmids
+          if (circuit['chassis'])
+            p Chassis
+            .ui.label
+              a(href='/term/chassis/' + circuit['chassis']['term_id'], target='_blank')= circuit['chassis']['name']
+          if (circuit['plasmids'])
+            p Plasmids
+            each plasmid in circuit['plasmids']
+              .ui.label
+                a(href='/term/plasmid/' + plasmid['term_id'], target='_blank')= plasmid['name']
+        .example
+          h3.ui.header Description
+          p!= circuit['description']
+
+        h2.ui.dividing.header Circuit construct
+        //section(id='circuitconstruct')
+        .example
+          h3.ui.header Coding frame
+          table.ui.sortable.table.segment
+            thead
+              tr
+                th id
+                th Input
+                th Output
+                th Transcription state
+                th Length
+            tbody
+              each cf in circuit['codingframe']
+                tr
+                  td= cf['codingframe_id']
+                  if (cf['input'])
+                    td= cf['input']
+                  else
+                    td ---
+                  if (cf['output'])
+                    td= cf['output']
+                  else
+                    td ---
+                  td= cf['state']
+                  if (cf['length'])
+                    td= cf['length']
+                  else
+                    td ---
+
+          h3.ui.header Parts
+          .ui.form.loading#parts-form
+            table.ui.sortable.table.segment
+              thead
+                tr
+                  th id
+                  th Type
+                  th Description
+              tbody
+                each part in circuit['parts']
+                  tr
+                    td
+                      a(href='/term/part/#{part['name']}', target='_blank')= part['name']
+                    td
+                    td
+
+        .example
+          h3.ui.header Input
+          p= circuit['input']
+        .example
+          h3.ui.header Output
+          p= circuit['output']
+        .example
+          h3.ui.header Result
+          p!= circuit['result']
+
+        h2.ui.dividing.header Reference
+        section(id='reference')
+          p= circuit['reference']
+
+    .ui.tab(data-tab="lgd")
+      //Logical genetic designer
+      .lgd-container
+        .lgd-info(style='display:none;')
+          table.ui.table.segment
+            thead
+              tr
+                th Name
+                th Description
+            tbody
+              tr
+                td#name
+                td#desc
+        .lgd-content
+          .lgd-render
+            canvas#canvas(width="800px", height="600px")
+            img#1(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#2(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#3(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#4(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#5(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#6(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#7(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#8(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#9(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#10(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#11(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#12(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#13(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#14(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#15(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#16(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#17(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#18(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#19(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#20(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#21(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#22(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#23(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#24(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#25(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#26(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#27(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#28(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#29(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#30(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#31(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#32(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#33(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#34(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#35(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#36(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#37(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#38(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#39(style="top: 440px;", onMouseOver="info_show(this,1);", onMouseOut="info_hide();")
+            img#a1(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a2(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a3(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a4(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a5(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a6(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a7(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a8(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a9(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a10(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a11(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a12(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a13(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a14(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a15(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a16(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a17(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a18(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a19(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a20(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a21(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a22(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a23(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a24(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a25(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a26(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a27(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a28(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a29(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a30(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a31(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a32(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a33(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a34(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a35(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a36(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a37(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a38(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+            img#a39(style="top: 440px;", onMouseOver="info_show(this,0);", onMouseOut="info_hide();")
+    .ui.tab(data-tab="feedback")
+      .feedback
+        .ui.piled.blue.segment
+          .ui.header
+            i.icon.inverted.circular.blue.comment
+            | Feedback
+          .ui.comments
+            .comment
+              a.avatar
+                img(src="/images/demo/avatar.jpg")
+              .content
+                a.author Dog Doggington
+                .metadata
+                  span.date 2 days ago
+                .text I think this is a great idea and i am voting on it
+                .actions
+                  a.reply Reply
+                  a.delete Delete
+            form.ui.reply.form(action='/circuit/feedback', method='POST')
+              .field
+                textarea
+              button.ui.fluid.blue.labeled.submit.icon.button(type='submit')
+                i.icon.edit
+                | Add Feedback
+
+    .ui.tab(data-tab="comment")
+      #disqus_thread
+      script(type="text/javascript").
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'circuitplus'; // required: replace example with your forum shortname
+        var disqus_identifier = '/circuit/#{circuit['id']}/';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      noscript
+        | Please enable JavaScript to view the 
+        a(href="http://disqus.com/?ref_noscript", target="_blank") comments powered by Disqus.
+      a.dsq-brlink(href="http://disqus.com")
+        | comments powered by 
+        span.logo-disqus Disqus
+  else
+    .ui.tab.active(data-tab="information") Circuit Not found

@@ -1,0 +1,75 @@
+extends ../common/layout
+
+block bodyheader
+  include searchheader
+
+block script
+  script(src='/static/js/searchbox.js?v=#{_G['version']['js']}')
+  script(src='/static/js/circuit-create.js?v=#{_G['version']['js']}')
+
+block content
+  include sidebar
+  .ui.piled.segment
+    h2.header Create
+
+    h2.ui.dividing.header Basic information
+    .example
+      h3.ui.header Classification
+      .ui.small.steps
+        - foreach (array_reverse($circuit['classification']) as $value)
+          a.ui.step.next(href='/term/classification/' + value['classification_id'], target='_blank')= value['name']
+
+    //section(id='basic')
+    .example
+      h3.ui.header Application
+      each tag in circuit['application_tag']
+        .ui.icon.label
+          i.icon.tag
+          a(href='/term/tag/' + tag['term_id'], target='_blank')= tag['name']
+    .example
+      h3.ui.header Description
+      p!= circuit['description']
+    .example
+      h3.ui.header Chassis and plasmids
+      if (circuit['chassis'])
+        p Chassis
+        .ui.label
+          a(href='/term/chassis/' + circuit['chassis']['term_id'], target='_blank')= circuit['chassis']['name']
+      if (circuit['plasmids'])
+        p Plasmids
+        each plasmid in circuit['plasmids']
+          .ui.label
+            a(href='/term/plasmid/' + plasmid['term_id'], target='_blank')= plasmid['name']
+
+    h2.ui.dividing.header Circuit construct
+    //section(id='circuitconstruct')
+    .example
+      h3.ui.header Coding frame
+      table.ui.sortable.table.segment
+        thead
+          tr
+            th id
+            th Input
+            th Output
+            th Transcription state
+        tbody
+          each cf in circuit['codingframe']
+            tr
+              td= cf['codingframe_id']
+              td= cf['input']
+              td= cf['output']
+              td= cf['state']
+
+    .example
+      h3.ui.header Input
+      p= circuit['input']
+    .example
+      h3.ui.header Output
+      p= circuit['output']
+    .example
+      h3.ui.header Result
+      p!= circuit['result']
+
+    h2.ui.dividing.header Reference
+    section(id='reference')
+      p= circuit['reference']

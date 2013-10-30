@@ -1,0 +1,11 @@
+extends ../common/layout
+
+block bodyheader
+  div.segment
+    div.container#overview
+      div.introduction
+        block introduction
+
+block script
+  script(src='/static/js/waypoints.js?v=#{version.js}')
+  script(src='/static/js/waypoints-ready.js?v=#{version.js}')

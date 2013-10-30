@@ -1,0 +1,13 @@
+.user-cover
+  .user-info-shadow
+  .user-info
+    .user-info-bar
+      .user-info-block
+        .user-avatar.img-rounded
+          if (user['avatar_url'])
+            img(src=user['avatar_url'])
+          else
+            img(src='/static/img/user/def-avatar.png')
+        .user-text
+          .user-text-block
+            .user-name= user['username']

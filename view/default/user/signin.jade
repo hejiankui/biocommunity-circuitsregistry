@@ -1,0 +1,70 @@
+extends ../common/layout
+
+block bodyheader
+  div.segment
+    div.container
+      div.inverted.pull-right
+        a.ui.red.large.labeled.button(href='/user/signup') Sign up
+      div.introduction#login-welcome
+        h1.ui.dividing.header Sign in
+        p(class='lead') Welcome back to Circuit+
+
+block content
+  div.span7
+    div.signin-board
+      form.ui.form.segment#login_form(autocomplete='on', action='/user/signin/login', method='POST')
+        div(style='display:none')
+          input(type='hidden', name='formhash', value=_G['formhash'])
+          if (redirect_url)
+            input(type='hidden', name='redirect_url', value=redirect_url)
+        div.field(class=($err['username'] ? 'error' : ''))#username
+          label Username
+          div.ui.left.labeled.icon.input
+            input(type='text', id='signin-username', name='user[username]', tabindex='1', placeholder='Username')
+            i.icon.user
+            div.ui.corner.label
+              i.icon.asterisk
+            if (err['username'])
+              div.ui.red.pointing.above.ui.label= err.msg
+        div.field(class=($err['password'] ? 'error' : ''))#password
+          label Password
+          div.ui.left.labeled.icon.input
+            input(type='password', id='signin-password', name='user[password]', tabindex='2')
+            i.icon.lock
+            div.ui.corner.label
+              i.icon.asterisk
+          if (err['password'])
+            div.ui.red.pointing.above.ui.label= err.msg
+        div.inline.field#remember-forgot
+          div.ui.checkbox
+            input(type='checkbox', value='1', name='remember_me', tabindex='3', checked='checked')
+            label Remember Me
+        div.inline.field
+          a.item(href="/user/forgot") Forgot?
+        div.ui.blue.submit.button#btnsubmit(class='btn btn-primary', tabindex='4', onclick='check_login();') Sign in
+
+block script
+  script(type='text/javascript').
+    $(document).ready(function () {
+      $('.ui.checkbox').checkbox();
+    });
+    function check_login() {
+      var form = $('#login_form');
+      var checkThings = ['.field#username', '.field#password'];
+      var checkPass = true;
+
+      $.each(checkThings, function (i, value) {
+        var field = form.find(value);
+        var input = field.find('input');
+        if (!input.val()) {
+          field.addClass('error');
+          checkPass = false;
+        } else {
+          field.removeClass('error');
+        }
+      });
+
+      if (checkPass) {
+        form.submit();
+      }
+    }

@@ -1,0 +1,14 @@
+extends ./userlayout
+
+block user-form
+  .ui.raised.segment
+    .ui.ribbon.label Group
+    p
+      a.ui.icon.label(href='/user/group/#{user['groupid']}')
+        i.users.icon
+        | Group
+    .ui.ribbon.label Bio
+    if (user['profile']['bio'])
+      .ui.info.message= user['profile']['bio']
+    else
+      .ui.info.message No Introduction...

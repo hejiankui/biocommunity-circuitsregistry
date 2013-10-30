@@ -1,0 +1,60 @@
+extends ../common/layout
+
+block bodyheader
+  div.segment
+    div.container
+      div.inverted.pull-right
+        a.ui.blue.large.labeled.button(href='/user/signin') Sign in
+      div.introduction
+        h1.ui.dividing.header Forgot
+        p(class='lead') Get back to Circuit+
+
+block content
+  div.forgot-board
+    form.ui.form.segment#forgot_form(autocomplete='on', action='/user/forgot/submit', method='POST')
+      div(style='display:none')
+        input(type='hidden', name='formhash', value=_G['formhash'])
+        if (redirect_url)
+          input(type='hidden', name='redirect_url', value=redirect_url)
+      div.field(class=($err['username'] ? 'error' : ''))#username
+        label Username
+        div.ui.left.labeled.icon.input
+          input(type='text', id='forgot-username', name='user[username]', tabindex='1', placeholder='Username')
+          i.icon.user
+          div.ui.corner.label
+            i.icon.asterisk
+          if (err['username'])
+            div.ui.red.pointing.above.ui.label= err.msg
+      div.field(class=($err['email'] ? 'error' : ''))#email
+        label Email
+        div.ui.left.labeled.icon.input
+          input(type='email', id='forgot-email', name='user[email]', tabindex='2')
+          i.icon.mail
+          div.ui.corner.label
+            i.icon.asterisk
+        if (err['email'])
+          div.ui.red.pointing.above.ui.label= err.msg
+      div.ui.blue.submit.button#btnsubmit(class='btn btn-primary', tabindex='3', onclick='check_forgot();') Send me a password reset email
+
+block script
+  script(type='text/javascript').
+    function check_forgot() {
+      var form = $('#forgot_form');
+      var checkThings = ['.field#username', '.field#email'];
+      var checkPass = true;
+
+      $.each(checkThings, function (i, value) {
+        var field = form.find(value);
+        var input = field.find('input');
+        if (!input.val()) {
+          field.addClass('error');
+          checkPass = false;
+        } else {
+          field.removeClass('error');
+        }
+      });
+
+      if (checkPass) {
+        form.submit();
+      }
+    }

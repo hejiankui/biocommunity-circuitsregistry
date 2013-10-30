@@ -1,0 +1,23 @@
+extends layout
+
+block bodyheader
+  .ui.segment
+
+block content
+  header_title = 'Info'
+  message_class = ''
+  icon_class = 'info'
+  case alerttype
+    when 'alert_error'
+      header_title = 'Error'
+      message_class = 'error'
+      icon_class = 'exclamation'
+    when 'alert_right'
+      header_title = 'Success'
+      message_class = 'success'
+      icon_class = 'check'
+  .ui.icon.message(class=message_class)
+    i.icon(class=icon_class)
+    .content
+      .header= header_title
+      p !{show_message}

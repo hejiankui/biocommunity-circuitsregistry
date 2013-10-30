@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Logical genetic designer</title>
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+<link href="lgd.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="lgd-container">
+  <div class="lgd-info"  style="display:none">
+    <table id="table" class="table-bordered"  style="width:400px" >
+    	<tr>
+    	  <td>Name</td>
+    	  <td id="name"></td>
+    	</tr>
+    	<tr>
+    	  <td>Description</td>
+    	  <td id="desc"></td>
+    	</tr>
+    </table>
+  </div>
+  <div class="lgd-render">
+    <canvas id="canvas" width="800px" height="600px"></canvas>
+    <img id="1"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="2"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="3"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="4"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="5"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="6"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="7"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="8"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="9"  src="" style="top: 440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="10"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="11"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="12"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="13"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="14"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="15"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="16"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="17"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="18"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="19"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="20"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="21"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="22"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="23"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" />
+    <img id="24"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="25"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="26"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    <img id="27"  src="" style="top:440px" onMouseOver="info_show(this,1)" onMouseOut="info_hide()" /> 
+    
+    <img id="a1"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a2"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a3"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a4"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a5"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a6"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a7"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a8"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a9"  src="" style="top: 440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a10"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a11"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a12"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a13"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a14"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a15"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a16"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" />
+    <img id="a17"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a18"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a19"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+    <img id="a20"  src="" style="top:440px" onMouseOver="info_show(this)" onMouseOut="info_hide()" /> 
+  </div>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/static/js/lgd-example.js"></script>
+<script type="text/javascript" src="/static/js/lgd.js"></script>
+<script type="text/javascript">
+  init_lgd(circuit_lgd);
+</script>
+</body>
+</html>

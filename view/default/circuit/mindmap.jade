@@ -1,0 +1,32 @@
+extends ../common/layout
+
+block bodyheader
+  div.segment
+    div.container#overview
+      include ../common/searchfield
+      div.introduction
+        h1.ui.dividing.header Mindmap
+        p(class='lead') Where you can find your circuit and do brainstorm.
+
+block stylesheet
+  link(rel='stylesheet', href='/static/mindmap/mindroad.css?v=#{_G['version']['css']}')
+
+block script
+  script(src='/static/js/searchbox.js?v=#{_G['version']['js']}')
+  script(src='/static/mindmap/d3.v3.min.js?v=#{_G['version']['js']}')
+  script(type="text/javascript").
+    var mindmap_tree = !{json_mindmap_tree};
+    function send(b) {
+      if (b.url) {
+        window.open(b.url, "_blank");
+      }
+    }
+    $(document).ready(function () {
+      if (mindmap_tree) {
+        init_mindmap(mindmap_tree);
+      }
+    });
+  script(src='/static/mindmap/mindroad.js?v=#{_G['version']['js']}')
+
+block content
+  .mindmap#content

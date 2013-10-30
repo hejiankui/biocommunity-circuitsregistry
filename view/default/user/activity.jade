@@ -1,0 +1,29 @@
+extends ./userlayout
+
+block nav-tabs
+  li
+    a(href='/user')= lang.user.profile
+  li
+    a(href='/user/page')= lang.user.page
+  li.active
+    a(href='/user/activity')= lang.user.activity
+  - if (!user.inpage)
+    li
+      a(href='/user/wallet')= lang.user.wallet
+  li
+    a(href='/user/config')= lang.user.config
+
+block user-form
+  .header
+    ul.breadcrumb
+      li
+        i.icon-home
+        | 
+        a(href='/')= lang.title.index
+        span.divider /
+      li
+        a(href='/user')= lang.title.user.index
+        span.divider /
+      li.active= lang.user.activity
+  .inner
+    p= lang.info.in_process

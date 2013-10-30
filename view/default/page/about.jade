@@ -1,0 +1,65 @@
+extends page-layout
+
+block introduction
+  h1.ui.dividing.header About
+  p(class='lead') Some information about us
+
+block content
+  div.peek
+    div.ui.vertical.pointing.secondary.menu
+      a.active.item Site
+      a.item About us
+      a.item Contact
+
+  div.span9
+    h2.ui.dividing.header Site
+    section(id='aboutsite')
+
+      h3 Name
+      
+      h4 Circuit+
+
+      h4 BioMiao
+      p From our mascot, cute cats.
+
+      h3 Property
+      p A website for all students, biologists and everyone.
+
+      h3 Funciton
+      p Now, we have 
+        strong User
+        | , 
+        strong Circuit
+        | and so on.
+
+    h2.ui.dividing.header About us
+    section(id='aboutus')
+
+      h3 Developer
+      p SUSTC-ShenZhen-B develops the main frame using
+        a(href='http://php.net/', target='_blank')
+          code php
+        | . Please check
+        a(href='/page/thanks') Thanks
+        |  to learn about the detailed information.
+      h3 Maintainer
+      p SUSTC-ShenZhen-B
+      h3 Donator
+      p None
+      h3 Operator
+      p None
+
+    h2.ui.dividing.header Contact
+    section(id='contact')
+
+      h3 Mail
+      p
+        a(href='mailto:admin@circuitplus.org') admin@circuitplus.org
+        |  (Not available now)
+
+      h3 Address
+      p South University of Science and Technology of China,
+        br
+        | 1088 Tangchang Rd., Nanshan District, Shenzhen,
+        br
+        | Guangdong, P.R.China 518055

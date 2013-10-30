@@ -1,0 +1,83 @@
+- if (u.uid)
+  .panel.user-card
+    - if (!u.noheader)
+      .header
+        i.icon-user
+        | 
+        - if (u.title)
+          span.col_fade= u.title
+        - else if (u.uid === user.uid)
+          span.col_fade= lang.info.my
+        - else
+          span.col_fade= lang.title.user.index
+    .user-cover
+      .user-front-cover
+        - if (u.front_cover_resource_id > 0)
+          img(src=resurl[u.front_cover_resource_id])
+        - else
+          img(src='/static/img/user/def-front-cover.jpg')
+      .user-info
+        .user-info-bar
+          .user-info-block
+            .user-avatar.img-circle
+              - if (u.avatar_resource_id > 0)
+                img(src=resurl[u.avatar_resource_id])
+              - else
+                img(src='/static/img/user/def-avatar.png')
+            .user-text
+              .user-text-block
+                .user-name
+                  - if (u.url)
+                    a(href=u.url, target='blank_')= u.showname
+                  - else if (u.forpage)
+                    a(href='/user/page/' + u.page_id, target='blank_')
+                      - if (u.username)
+                        = u.username
+                      - else
+                        span.muted (#{lang.user.nousername})
+                  - else
+                    a(href='/user', target='blank_')= u.showname
+                    - if (u.balance && u.inpage)
+                      .user-realname
+                        | (
+                        = user.realname
+                        | )
+
+      .user-bottom
+    .inner
+      - if (u.allow_remove_permission)
+        .user-page-control
+          a.btn.btn-primary(href='/user/page/manage?action=remove&uid=' + u.uid + '&csrf=' + user.csrf)= lang.user.remove_page
+      - if (u.show_store_controls)
+        .user-page-control
+          a.btn.btn-primary(href='/store/house')= lang.store.house
+          | 
+          a.btn.btn-primary(href='/store/settle')= lang.store.settle
+      - if (u.forpage)
+        .user-page-info
+          - if (u.noaccount)
+            - if (u.uid === user.uid)
+              span= lang.user.owner
+            - else
+              span= lang.user.manager
+          - else
+            span= lang.user.body
+        .user-page-control
+          - if (u.uid !== user.uid)
+            a.btn.btn-primary(href='/user/page/manage?action=remove&page_id=' + u.page_id + '&csrf=' + user.csrf)= lang.user.remove_page
+            | 
+          - if (u.noaccount && u.uid === user.uid && user.page_id !== u.page_id)
+            a.btn.btn-primary.disabled(href='/user/page/delete?page_id=' + u.page_id + '&csrf=' + user.csrf)= lang.user.delete_page
+            | 
+          - if (u.page_id !== user.page_id)
+            a.btn.btn-primary(href='/user/page/switch?page_id=' + u.page_id + '&csrf=' + user.csrf)= lang.user.switch_page
+      - if (u.balance)
+        .user-balance #{lang.user.balance} ¥ 
+          span= u.balance.str
+      .clearfix
+- else
+  .panel
+    .header
+      span.col_fade= lang.user.login
+    .inner
+      a.btn.btn-primary(href='/user/login?url=' + base.url)= lang.user.login

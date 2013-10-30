@@ -1,0 +1,54 @@
+extends ../common/layout
+
+block bodyheader
+  include searchheader
+
+block script
+  script(src='/static/js/searchbox.js?v=#{_G['version']['js']}')
+
+block content
+  include sidebar
+  .ui.piled.segment
+    .floating.ui.teal.label= result_count
+    h2.header Search Result
+    if qtooshort
+      .ui.icon.message.warning
+        i.icon.warning
+        .content
+          p Query string too short.
+    else
+      if circuits
+        each circuit in circuits
+          .ui.green.segment
+            h2.header
+              a(href='/circuit/' + circuit['circuit_id'])= circuit['id']
+            p!= circuit['name']
+            if (circuit['classification'])
+              .ui.small.steps
+                - foreach (array_reverse($circuit['classification']) as $value)
+                  a.ui.step.next(href='/term/classification/' + value['classification_id'], target='_blank')!= value['name']
+            if (circuit['description_short'])
+              p!= circuit['description_short']
+            if (circuit['chassis'])
+              div
+                b Chassis
+                .ui.label
+                  a(href='/term/chassis/' + circuit['chassis']['term_id'], target='_blank')!= circuit['chassis']['name']
+            if (circuit['plasmids'])
+              div
+                b Plasmids
+                each plasmid in circuit['plasmids']
+                  .ui.label
+                    a(href='/term/plasmid/' + plasmid['term_id'], target='_blank')!= plasmid['name']
+            if (circuit['tags'])
+              each tag in circuit['tags']
+                .ui.icon.label
+                  i.icon.tag
+                  a(href='/term/tag/' + tag['term_id'], target='_blank')!= tag['name']
+
+        include ../common/pagination
+      else 
+        .ui.icon.message
+          i.icon.info
+          .content
+            p No circuit found.

@@ -1,0 +1,23 @@
+.ui.fluid.icon.input#searchfield
+  .ui.top.right.pointing.dropdown.icon.button
+    i.icon.search
+    .menu
+      a.icon.item(onclick='searchby("name");')
+        i.search.icon
+        | Search "
+        strong.searchtext
+        | " by name
+      a.icon.item(onclick='searchby("description");')
+        i.search.icon
+        | Search "
+        strong.searchtext
+        | " by description
+      a.icon.item(onclick='searchby("tag");')
+        i.search.icon
+        | Search "
+        strong.searchtext
+        | " by application
+  input#searchbox(type='text', placeholder='Search...', value=q)
+if search_method
+  script(type='text/javascript').
+    var search_method = "#{search_method}";

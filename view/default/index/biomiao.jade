@@ -1,0 +1,17 @@
+extends ../common/layout
+
+block bodyheader
+  .index-header
+
+block script
+  script(src='/static/js/searchbox.js?v=#{_G['version']['js']}')
+
+block content
+  .ui.grid
+    .row
+      .logo
+        img(src='/static/img/logo.png')
+    .row.search
+      .four.wide.column
+      .eight.wide.column
+        include ../common/searchfield

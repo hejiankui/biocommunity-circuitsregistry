@@ -1,0 +1,21 @@
+extends ../common/layout
+
+block bodyheader
+  div.user-header.segment
+    include ./user-cover
+    .user-nav-tabs
+      .ui.secondary.pointing.menu
+        a.item(class=(($_G['basescript'] == 'user' && CURMODULE == 'index') ? 'active' : ''), href='/user')
+          i.user.icon
+          | Profile
+        - if ($_G['uid'] == $user['uid'])
+          a.item(class=(($_G['basescript'] == 'user' && CURMODULE == 'settings') ? 'active' : ''), href='/user/settings')
+            i.settings.icon
+            | Settings
+
+block content
+  .user-form
+    block user-form
+
+block script
+

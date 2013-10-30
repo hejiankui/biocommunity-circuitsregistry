@@ -1,0 +1,93 @@
+extends ./userlayout
+
+block nav-tabs
+  li
+    a(href='/user')= lang.user.profile
+  li.active
+    a(href='/user/page')= lang.user.page
+  li
+    a(href='/user/activity')= lang.user.activity
+  - if (!user.inpage)
+    li
+      a(href='/user/wallet')= lang.user.wallet
+  li
+    a(href='/user/config')= lang.user.config
+
+block user-form
+  .header
+    ul.breadcrumb
+      li
+        i.icon-home
+        | 
+        a(href='/')= lang.title.index
+        span.divider /
+      li
+        a(href='/user')= lang.title.user.index
+        span.divider /
+      li.active= lang.user.page
+  .inner
+    - if (!user.is_page_manger && user.inpage)
+      form.form-horizontal#manage_page_form(enctype='application/x-www-form-urlencoded', method='POST', action='/user/page/manage')
+        legend= lang.info.user.add_page_manager
+        div(style='display:none')
+          input(type='hidden', name='csrf', value=user.csrf)
+          input(type='hidden', name='action', value='add')
+        fieldset.control-group
+          label.control-label(for='user_studentid')= lang.user.studentid
+          .controls
+            input#user_studentid(maxlength='20', type='text', name='user_page[studentid]')
+        .form-actions
+          button.btn.btn-primary(type='submit')= lang.info.add
+      form
+        legend= lang.info.user.current_page_manager
+        - if (user.page_manager.length > 0)
+          ul.user-pages
+            each u in user.page_manager
+              li.user-page
+                - u.noheader = true;
+                - u.allow_remove_permission = true;
+                include ./user-card
+          .clearfix
+        - else
+          .alert.alert-block
+            h4= lang.info.oops
+            p= lang.info.user.no_page_manager
+      hr
+    ul.user-pages
+      each u in user.page_list
+        li.user-page
+          - u.noheader = true;
+          - u.forpage = true;
+          include ./user-card
+    .clearfix
+    hr
+    a.btn.btn-primary(href='#user_page_create_modal', role='button', data-toggle='modal')= lang.user.create_page
+
+block other-content
+  div.modal.hide.fade#user_page_create_modal(tabindex='-1', role='dialog', aria-labelledby='create_page_label', aria-hidden='true')
+    form.form-horizontal.modal-form#create_page_form(enctype='application/x-www-form-urlencoded', method='POST', action='/user/page/create')
+      div(style='display:none')
+        input(type='hidden', name='csrf', value=user.csrf)
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#create_page_label=lang.user.create_page
+      .modal-body
+        fieldset.control-group
+          label.control-label(for='user_username')= lang.user.username
+          .controls
+            input#user_username(maxlength='20', type='text', name='user_page[username]', value='')
+            p= lang.user.input_tips.username
+        fieldset.control-group
+          label.control-label(for='user_phonenumber')= lang.user.phonenumber
+          .controls
+            input#user_phonenumber(maxlength='20', type='text', name='user_page[phonenumber]', value='')
+        fieldset.control-group
+          label.control-label(for='user_bio')= lang.user.bio
+          .controls
+            textarea.input-xlarge#user_bio(name='user_page[bio]')
+            p= lang.user.input_tips.bio
+      .modal-footer
+        button.btn(data-dismiss='modal', aria-hidden='true')= lang.info.cancel
+        | 
+        button.btn.btn-primary(type='submit')= lang.info.create
+

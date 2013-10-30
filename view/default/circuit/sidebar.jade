@@ -1,0 +1,8 @@
+.peek#sidebar
+  .ui.vertical.pointing.menu
+    a.icon.item(class=(($_G['basescript'] == 'circuit' && (CURMODULE == 'list' || CURMODULE == 'search')) ? 'active' : ''), href='/circuit')
+      i.list.layout.icon
+      | List
+    a.icon.item(class=(($_G['basescript'] == 'circuit' && CURMODULE == 'create') ? 'active' : ''), href='/circuit/create')
+      i.edit.icon
+      | Create

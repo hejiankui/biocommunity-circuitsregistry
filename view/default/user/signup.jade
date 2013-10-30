@@ -1,0 +1,106 @@
+extends ../common/layout
+
+block bodyheader
+  div.segment
+    div.container
+      div.inverted.pull-right
+        a.ui.blue.large.labeled.button(href='/user/signin') Sign in
+      div.introduction#signup-welcome
+        h1.ui.dividing.header Sign up
+        p(class='lead') Welcome to Circuit+
+
+block content
+  div.span7
+    div.signup-board
+      form.ui.form.segment#signup_form(autocomplete='off', action='/user/signup/submit', method='POST')
+        div(style='display:none')
+          input(type='hidden', name='formhash', value=_G['formhash'])
+          if (redirect_url)
+            input(type='hidden', name='redirect_url', value=redirect_url)
+        div.field(class=($err['username'] ? 'error' : ''))#username
+          label Username
+          div.ui.left.labeled.icon.input
+            input(type='text', id='signup-username', name='user[username]', tabindex='1', placeholder='Username')
+            i.icon.user
+            div.ui.corner.label
+              i.icon.asterisk
+            if (err['username'])
+              div.ui.red.pointing.above.ui.label= err.msg
+        div.field(class=($err['password'] ? 'error' : ''))#password
+          label Password
+          div.ui.left.labeled.icon.input
+            input(type='password', id='signup-password1', name='user[password1]', tabindex='2')
+            i.icon.lock
+            div.ui.corner.label
+              i.icon.asterisk
+        div.field(class=($err['password'] ? 'error' : ''))#password
+          label Repeat Password
+          div.ui.left.labeled.icon.input
+            input(type='password', id='signup-password2', name='user[password2]', tabindex='2')
+            i.icon.lock
+            div.ui.corner.label
+              i.icon.asterisk
+          if (err['password'])
+            div.ui.red.pointing.above.ui.label= err.msg
+        div.field(class=($err['email'] ? 'error' : ''))#email
+          label Email
+          div.ui.left.labeled.icon.input
+            input(type='email', id='signup-email', name='user[email]', tabindex='2')
+            i.icon.mail
+            div.ui.corner.label
+              i.icon.asterisk
+          if (err['email'])
+            div.ui.red.pointing.above.ui.label= err.msg
+        div.inline.field#agree
+          div.ui.checkbox
+            input(type='checkbox', name='agree', tabindex='3', value='1')
+            label I agree to the Terms and Conditions
+        div.ui.blue.submit.button#btnsubmit(class='btn btn-primary', tabindex='4', onclick='check_signup();') Submit
+
+block script
+  script(type='text/javascript').
+    $(document).ready(function () {
+      $('.ui.checkbox').checkbox();
+    });
+    function check_signup() {
+      var form = $('#signup_form');
+      var checkThings = ['.field#username', '.field#email'];
+      var checkPass = true;
+
+      $.each(checkThings, function (i, value) {
+        var field = form.find(value);
+        var input = field.find('input');
+        if (!input.val()) {
+          field.addClass('error');
+          checkPass = false;
+        } else {
+          field.removeClass('error');
+        }
+      });
+
+      var fieldAgree = form.find('.field#agree');
+      var inputAgree = fieldAgree.find('input');
+
+      if (!inputAgree.prop('checked')) {
+        fieldAgree.addClass('error');
+        checkPass = false;
+      } else {
+        fieldAgree.removeClass('error');
+      }
+
+      var fieldPassword = form.find('.field#password');
+      var inputPassword = fieldPassword.find('input');
+
+      if (inputPassword.length != 2
+        || !$(inputPassword[0]).val() || !$(inputPassword[1]).val()
+        || $(inputPassword[0]).val() != $(inputPassword[1]).val()) {
+        fieldPassword.addClass('error');
+        checkPass = false;
+      } else {
+        fieldPassword.removeClass('error');
+      }
+
+      if (checkPass) {
+        form.submit();
+      }
+    }

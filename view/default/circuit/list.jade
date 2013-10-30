@@ -1,0 +1,33 @@
+extends ../common/layout
+
+block bodyheader
+  include searchheader
+
+block script
+  script(src='/static/js/searchbox.js?v=#{_G['version']['js']}')
+
+block content
+  include sidebar
+  .ui.piled.segment
+    .floating.ui.teal.label= result_count
+    h2.header List
+    if circuits
+      each circuit in circuits
+        .ui.green.segment
+          h2.header
+            a(href='/circuit/' + circuit['circuit_id'])= circuit['id']
+          p!= circuit['name']
+          if (circuit['description_short'])
+            p!= circuit['description_short']
+          if (circuit['tags'])
+            each tag in circuit['tags']
+              .ui.icon.label
+                i.icon.tag
+                a(href='/term/tag/' + tag['term_id'], target='_blank')!= tag['name']
+
+      include ../common/pagination
+    else 
+      .ui.icon.message
+        i.icon.info
+        .content
+          p No circuit found.

@@ -1,0 +1,30 @@
+
+.node circle {
+	r:40;
+	cursor: pointer;
+	fill: #EFEFEF;
+	color: rgba(0, 0, 0, 0.6);
+	stroke: steelblue;
+	stroke-width: 1.5px;
+}
+
+.node text {
+	font-size: 13px;
+}
+
+.node.link text {
+	fill: #A95252;
+  font-weight: bold;
+}
+
+path.link {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 1px;
+}
+
+@media only screen and (max-width : 450px) {
+	.node circle {
+		r: 20;
+	}
+}
