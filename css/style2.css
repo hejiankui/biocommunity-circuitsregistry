@@ -1,0 +1,158 @@
+/*style for all pages*/
+body {
+	min-width: 960px;
+	margin: 0;
+	
+	font-size: small;
+}
+
+#header {
+	
+}
+#logo {
+	margin-left: 40px;
+	margin-top: 3px;
+	width: 350px;
+	position: bottom;
+}
+#search {
+	height: 22px;
+	margin-top: 24px;
+	margin-right: 40px;
+	float: right;
+	background: white;
+	border-radius: 10px;
+	border: 1px solid #ccc;
+	text-indent: .5em;
+}
+#search img {
+	width: 22px;
+}
+#search input {
+	position: relative;
+	top: -6px;
+	left: -6px;
+	border: none;
+	outline: none;
+	color: #bbb;
+}
+#navi {
+	margin-top: 28px;
+	margin-right: 30px;
+	float: right;
+}
+#navi a {
+	margin-right: 5px;
+	padding-top: 5px;
+	padding-right: 30px;
+	padding-left: 10px;
+	font-family: Helvetica, Geneva, Verdana, Arial, sans-serif;
+	text-decoration: none;
+	color: white;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+.thispage {
+	border-top: solid #2aacc8;
+}
+
+#copyright {
+	margin-top: 50px;
+	margin-right: 30px;
+	float:right;
+}
+
+
+
+.bu {
+	width:100px;
+	padding: 10px 10px;
+	border-radius: 10px;
+	text-decoration: none;
+	color: white;
+	background: rgba(0,0,0,.1);
+}
+.bu:hover{
+	cursor: pointer;
+	background-color: rgba(256,256,256,.15);
+}
+
+
+#inf {
+	width: 1000px;
+	margin: 65px auto 0px auto;
+	padding: 50px 40px;
+	border-radius: 15px;
+	background: rgba(50, 50, 50, 0.6);
+	font-size: 1.5em;
+	font-family: Verdana, Arial, sans-serif;
+	color: white;
+}
+
+#inf_top h1 {
+	margin-bottom: 50px;
+}
+#inf_top img {
+	width: 400px; 
+	height: 300px;
+}
+#inf_top_mid {
+	display: inline-block; 
+	vertical-align: top; 
+	text-align: center; 
+	position:relative; 
+	top: 55px; 
+	left: 190px;
+}
+#inf_top_right {
+	float: right;
+}
+
+#inf_mid {
+	margin-top: 25px;
+}
+#inf_mid textarea {
+	border-radius: 5px; 
+	outline: none; 
+	vertical-align: top;
+	resize:none;
+	font-family: inherit;
+}
+#comment, #inf_mid_right {
+	display: inline-block;
+}
+#comment {
+	width: 440px; 
+	height: 395px;
+	padding: 5px;
+	background: rgba(0,0,0,.1);
+	border: none;
+	color: #fff;
+	font-size: .77em;
+}
+#inf_mid_right {
+	width: 519px;
+	margin-left: 20px;
+}
+#inf_mid_right p {
+	margin-top: 0;
+	margin-bottom: 30px;
+	height: 270px;
+	font-size: .75em;
+}
+#yc {
+	width:408px; 
+	height: 95px;
+	padding-left: 4px;
+	font-size: .8em; 
+	color: #bbb;
+	border: 2px solid #ccc; 
+}
+
+#sub {
+	vertical-align: bottom;
+	position: relative;
+	top: -8px;
+	left: 8px;
+}
+

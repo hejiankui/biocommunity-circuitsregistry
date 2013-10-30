@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Team:SUSTC-Shenzhen-B</title>
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			html, body {
+				height: 100%;
+			}
+			#top_section {
+				background: black no-repeat 50% 0; 
+				height: 100%; 
+				overflow: hidden;
+			}
+			ul li {
+				display: inline-block;
+				padding: 15px;
+			}
+			ul li a {
+				text-decoration: none;
+				color: white;
+				font-size: big;
+			}
+		</style>
+		<script>
+		window.onload = function () {
+			var menu = document.getElementById('menu');
+			var init = menu.offsetTop;
+			var docked;
+			window.onscroll = function () {
+            if (!docked && (menu.offsetTop - scrollTop() < 0)) {
+				menu.style.top = 0;
+				menu.style.position = 'fixed';
+				menu.className = 'docked';
+				docked = true;
+            } else if (docked && scrollTop() <= init) {
+				menu.style.position = 'absolute';
+				menu.style.top = init + 'px';
+				menu.className = menu.className.replace('docked', '');
+				docked = false;
+            }
+			};
+			function scrollTop() {
+				return document.body.scrollTop || document.documentElement.scrollTop;
+			}
+		};
+		</script>
+	</head>
+	<body style="background: black;">
+		<div id="top_section" style="color: white; margin:0px">
+			<div class="text-center" style="width:50%; line-height: 1; position: relative; left: 25%; top: 10%; padding: 20px">
+				<img src="img/logo.png" style="width: 35%; padding-bottom: 5%;" />
+				<h1 style="font-size: 80px; margin-bottom: 5%;">Biomiao</h1>
+				<p>Welcome to the wiki of SUSTC-Shenzhen B! This is the second year that SUSTC takes part in the iGEM. In our wiki, you can learn every aspect of our project: the software itself, team menbers, human pracrice, and notebook is also included.</p>
+				<a href="" class="btn btn-success">Go To Biomiao</a>
+				<p>Or</p>
+				<h2>Move down to see more...</h2>
+			</div>
+		</div>
+		<div id="menu" style="width:100%; background: rgba(0,0,0,1); position: relative; top: -60px; height:50px; z-index: 1000;";>	
+			<ul style="list-style-type: none; float: right;">
+				<li><a href="#project">Project</a></li>
+				<li><a href="#team">Team</a></li>
+				<li><a href="#human">Human Practice</a></li>
+				<li><a href="#notebook">Notebook</a></li>
+			</ul>
+		</div>
+		<div id="project" style="background: url(img/2.jpg); height: 800px;">
+			<div style="position: relative; top: 20%; left: 50%; color: #888; margin: 5%; width: 40%;">
+				<h1>Biomiao.org</h1>
+				<p>A repositry of gene citcuits in Synthetic Biology</p>
+				<p>A platform that holds light-weight Apps to re-utility the circuits information. LGD, TTEC are  provided.</p>
+				<p>In the future, you can say hello to other scientits to work collaboratly.</p>
+				<h3>Project Abstract</h3>
+				<p style="text-indent: 2em;">Our project, 3 Miao synthetic biology platform, is different from all the iGem software projects in the past, for we have an ambition to create a community for the whole synthetic biology. In this community, we offer a platform for the collection of handy tools provided by either the iGem teams or the company to facilitate users to study synthetic biology more conveniently. Among these handy tools, Mind Road, LGD and TTEC are uploaded by us. Mind Road is for projects review and divergent thinking. LGD is a genetic circuit designer which can present the logical relationship of related parts. On the other hand, the community allows users to learn the basic knowledge of synthetic biology, go through the break news of synthetic biology, post their own ideas, comment on others’ work, discuss with other people and so on, just like the Facebook and Twitter. In this way, our community will greatly popularize synthetic biology.</p>
+				<a href="project.html" class="btn btn-primary">See More</a>
+			</div>
+		</div>
+		<div id="team" style="background: url(img/3.png) #66c000 no-repeat 50% 100%; background-position: right bottom;height: 800px;">
+			<div style="padding-top: 80px; width: 280px; margin-left: 40px;">
+				<h1>Team</h1>
+				<p>We want to establish a user-friendly web2.0 platform which can function as both a handy tool kit and a community. There are mainly 3 reasons that we choose a webpage instead of a native application. First, current software need to users don’t need to download our software. Second, a webpage is not limited with the system, which means users can log in our webpage wherever they can reach the internet. And the last, all the information can be stored by the cloud, so users don’t have to worry about their information being lost.</p>
+				<a href="team.html" class="btn btn-primary">See More</a>
+			</div>
+		</div>
+		<div id="human" style="background: red no-repeat 50% 100%; height: 800px;">
+			<div style="margin-top:0px; padding-top: 80px">
+				<h1>Project Description</h1>
+				<p>We want to establish a user-friendly web2.0 platform which can function as both a handy tool kit and a community. There are mainly 3 reasons that we choose a webpage instead of a native application. First, current software need to users don’t need to download our software. Second, a webpage is not limited with the system, which means users can log in our webpage wherever they can reach the internet. And the last, all the information can be stored by the cloud, so users don’t have to worry about their information being lost.</p>
+				<a href="" class="btn btn-primary">See More</a>
+			</div>
+		</div>
+		<div id="notebook" style="background: yellow no-repeat 50% 100%; height: 800px;">
+			<div style="margin-top:0px; padding-top: 80px">
+				<h1>Project Description</h1>
+				<p>We want to establish a user-friendly web2.0 platform which can function as both a handy tool kit and a community. There are mainly 3 reasons that we choose a webpage instead of a native application. First, current software need to users don’t need to download our software. Second, a webpage is not limited with the system, which means users can log in our webpage wherever they can reach the internet. And the last, all the information can be stored by the cloud, so users don’t have to worry about their information being lost.</p>
+				<a href="notebook.html" class="btn btn-primary">See More</a>
+			</div>
+		</div>
+	</body>
+</html>

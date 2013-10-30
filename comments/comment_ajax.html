@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>COMMENTS TEST</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            function fetch(){
+                var content = $.ajax({
+                    type: "GET",
+                    url: "http://sustc-genome.org.cn/igem2013/comments/addcomment.php",
+                    dataType: "html"
+                });
+                content.done(function(data){
+                    alert("OK");
+                    $("#comments").append("<p>"+data + "</p>");
+                });
+            }
+            function PostComment(){
+                
+            }
+            
+            $(document).ready(function () {
+                fetch();
+            })
+        </script>
+    </head>
+    
+    <body>
+        <div>THIS IS FOR CONTENTS</div>
+        <div id="comments">
+            
+        </div>
+        <div id="formpost">
+            <textarea id="contents">Contents</textarea>
+            <a id="submitcom" onclick="fetch();">555555</a>
+        </div>
+    </body>
+</html>

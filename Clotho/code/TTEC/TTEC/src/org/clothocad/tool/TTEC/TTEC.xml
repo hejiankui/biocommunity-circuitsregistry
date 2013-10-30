@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin>
+<type>ClothoTool</type>
+<version>1.0</version>
+<classname>org-clothocad-tool-TTEC-Connect</classname>
+<description>Tutorial on how to use Clotho and various Apps</description>
+<displayname> TTEC ON CLOTHO </displayname>
+<uuid>org.clothocad.tool.TTEC</uuid>
+<screenshotpath>org/clothocad/tool/TTEC/screenshot.png</screenshotpath>
+<author>J. Christopher Anderson</author>
+<!--<dependency>org.clothocad.tool.helloworld</dependency>-->
+<iconpath>org/clothocad/tool/TTEC/logo.png</iconpath>
+    <folder name="org">
+        <folder name="clothocad">
+            <folder name="tool">
+                <folder name="TTEC">
+                    <file name="TTEC.exe" url="TTEC.exe"></file>
+                </folder>
+            </folder>
+        </folder>
+    </folder> 
+</plugin>

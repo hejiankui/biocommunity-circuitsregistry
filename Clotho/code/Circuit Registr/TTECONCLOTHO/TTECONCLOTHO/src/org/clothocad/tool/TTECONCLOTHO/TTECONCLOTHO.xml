@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<plugin>
+<type>ClothoTool</type>
+<version>1.0</version>
+<classname>org-clothocad-tool-TTECONCLOTHO-connect</classname>
+<description>Circuit registry is a registry of standard biological circuits.</description>
+<help>http://2012.igem.org/Team:SUSTC-Shenzhen-B</help>
+<displayname>Circuits</displayname>
+<uuid>org.clothocad.tool.TTECONCLOTHO</uuid>
+<screenshot>org/clothocad/tool/TTECONCLOTHO/screenshot.png</screenshot>
+<author>sustc-shenzhen-b</author>
+<iconpath>org/clothocad/tool/TTECONCLOTHO/logo.png</iconpath>
+</plugin>-->
+<plugin>
+<type>ClothoTool</type>
+<version>1.0</version>
+<classname>org-clothocad-tool-TTECONCLOTHO-connect</classname>
+<displayname>Circuit Registry</displayname>
+<description>Circuit registry is a registry of standard biological circuits.</description>
+<uuid>org.clothocad.tool.TTECONCLOTHO</uuid>
+<screenshotpath>org/clothocad/tool/TTECONCLOTHO/screenshot.png</screenshotpath>
+<author>sustc-shenzhen-b</author>
+<!--<dependency>org.clothocad.tool.helloworld</dependency>-->
+<iconpath>org/clothocad/tool/TTECONCLOTHO/logo.png</iconpath>
+    <help>
+        <helpurl>http://2012.igem.org/Team:SUSTC-Shenzhen-B</helpurl>
+        <helpdescription>For more information please see the help url</helpdescription>
+        <!--<helpcommand>Command1</helpcommand>-->
+        <!--<helpcommand>Command2</helpcommand>-->
+    </help>
+    
+ 
+</plugin>
